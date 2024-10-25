@@ -1,4 +1,4 @@
-const ProfileIcon = ({ colour = '#64648C', background = 'transparent' }) => {
+const ProfileIcon = ({ colour = "#64648C", background = "transparent" }) => {
   return (
     <svg
       width="41"
@@ -7,9 +7,9 @@ const ProfileIcon = ({ colour = '#64648C', background = 'transparent' }) => {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       style={{
-        borderRadius: '999px',
-        overflow: 'hidden',
-        background
+        borderRadius: "999px",
+        overflow: "hidden",
+        background,
       }}
     >
       <path

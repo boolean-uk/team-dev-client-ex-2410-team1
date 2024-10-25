@@ -1,20 +1,23 @@
-import { useState } from 'react';
-import AddIcon from '../../assets/icons/addIcon';
-import CohortIcon from '../../assets/icons/cohortIcon';
-import CohortIconFill from '../../assets/icons/cohortIcon-fill';
-import DeleteIcon from '../../assets/icons/deleteIcon';
-import MonitorIcon from '../../assets/icons/monitorIcon';
-import ProfileIcon from '../../assets/icons/profileIcon';
-import SquareBracketsIcon from '../../assets/icons/squareBracketsIcon';
-import Menu from '../menu';
-import MenuItem from '../menu/menuItem';
-import './style.css';
+import { useState } from "react";
+import AddIcon from "../../assets/icons/addIcon";
+import CohortIcon from "../../assets/icons/cohortIcon";
+import CohortIconFill from "../../assets/icons/cohortIcon-fill";
+import DeleteIcon from "../../assets/icons/deleteIcon";
+import MonitorIcon from "../../assets/icons/monitorIcon";
+import ProfileIcon from "../../assets/icons/profileIcon";
+import SquareBracketsIcon from "../../assets/icons/squareBracketsIcon";
+import Menu from "../menu";
+import MenuItem from "../menu/menuItem";
+import "./style.css";
 
 const ProfileCircle = ({ initials }) => {
   const [isMenuVisible, setIsMenuVisible] = useState(false);
 
   return (
-    <div className="profile-circle" onClick={() => setIsMenuVisible(!isMenuVisible)}>
+    <div
+      className="profile-circle"
+      onClick={() => setIsMenuVisible(!isMenuVisible)}
+    >
       {isMenuVisible && <CascadingMenu />}
 
       <div className="profile-icon">

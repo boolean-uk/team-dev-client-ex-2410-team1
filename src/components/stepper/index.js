@@ -1,8 +1,8 @@
-import Steps from './steps';
-import Card from '../card';
-import Button from '../button';
-import './style.css';
-import { useState } from 'react';
+import Steps from "./steps";
+import Card from "../card";
+import Button from "../button";
+import "./style.css";
+import { useState } from "react";
 
 const Stepper = ({ header, children, onComplete }) => {
   const [currentStep, setCurrentStep] = useState(0);
@@ -34,7 +34,7 @@ const Stepper = ({ header, children, onComplete }) => {
       <div className="stepper-buttons">
         <Button text="Back" classes="offwhite" onClick={onBackClick} />
         <Button
-          text={currentStep === children.length - 1 ? 'Submit' : 'Next'}
+          text={currentStep === children.length - 1 ? "Submit" : "Next"}
           classes="blue"
           onClick={onNextClick}
         />

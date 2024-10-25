@@ -1,13 +1,13 @@
-import { createContext, useEffect, useState } from 'react';
-import { useNavigate, useLocation, Navigate } from 'react-router-dom';
-import Header from '../components/header';
-import Modal from '../components/modal';
-import Navigation from '../components/navigation';
-import useAuth from '../hooks/useAuth';
-import { createProfile, login, register } from '../service/apiClient';
+import { createContext, useEffect, useState } from "react";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import Header from "../components/header";
+import Modal from "../components/modal";
+import Navigation from "../components/navigation";
+import useAuth from "../hooks/useAuth";
+import { createProfile, login, register } from "../service/apiClient";
 
 // eslint-disable-next-line camelcase
-import jwt_decode from 'jwt-decode';
+import jwt_decode from "jwt-decode";
 
 const AuthContext = createContext();
 
@@ -17,11 +17,11 @@ const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(null);
 
   useEffect(() => {
-    const storedToken = localStorage.getItem('token');
+    const storedToken = localStorage.getItem("token");
 
     if (storedToken) {
       setToken(storedToken);
-      navigate(location.state?.from?.pathname || '/');
+      navigate(location.state?.from?.pathname || "/");
     }
   }, [location.state?.from?.pathname, navigate]);
 
@@ -29,17 +29,17 @@ const AuthProvider = ({ children }) => {
     const res = await login(email, password);
 
     if (!res.data.token) {
-      return navigate('/login');
+      return navigate("/login");
     }
 
-    localStorage.setItem('token', res.data.token);
+    localStorage.setItem("token", res.data.token);
 
     setToken(res.token);
-    navigate(location.state?.from?.pathname || '/');
+    navigate(location.state?.from?.pathname || "/");
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
+    localStorage.removeItem("token");
     setToken(null);
   };
 
@@ -47,7 +47,7 @@ const AuthProvider = ({ children }) => {
     const res = await register(email, password);
     setToken(res.data.token);
 
-    navigate('/verification');
+    navigate("/verification");
   };
 
   const handleCreateProfile = async (firstName, lastName, githubUrl, bio) => {
@@ -55,8 +55,8 @@ const AuthProvider = ({ children }) => {
 
     await createProfile(userId, firstName, lastName, githubUrl, bio);
 
-    localStorage.setItem('token', token);
-    navigate('/');
+    localStorage.setItem("token", token);
+    navigate("/");
   };
 
   const value = {
@@ -64,7 +64,7 @@ const AuthProvider = ({ children }) => {
     onLogin: handleLogin,
     onLogout: handleLogout,
     onRegister: handleRegister,
-    onCreateProfile: handleCreateProfile
+    onCreateProfile: handleCreateProfile,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
@@ -75,7 +75,7 @@ const ProtectedRoute = ({ children }) => {
   const location = useLocation();
 
   if (!token) {
-    return <Navigate to={'/login'} replace state={{ from: location }} />;
+    return <Navigate to={"/login"} replace state={{ from: location }} />;
   }
 
   return (

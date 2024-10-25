@@ -1,4 +1,4 @@
-import './socialinks.css';
+import "./socialinks.css";
 
 const SocialLinks = () => {
   return (
@@ -9,7 +9,12 @@ const SocialLinks = () => {
         }}
         className="socialbutton"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 56 56" height="56">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 56 56"
+          height="56"
+        >
           <path
             fill="#3284FF"
             d="M47.19 28c0-1.294-.12-2.558-.34-3.784H28v7.568h11.408c-.74 2.62-2.297 4.86-4.378 6.406l5.886 4.684c3.88-3.66 6.273-8.967 6.273-14.874Z"
@@ -34,7 +39,12 @@ const SocialLinks = () => {
         }}
         className="socialbutton"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 56 56" height="56">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 56 56"
+          height="56"
+        >
           <g clipPath="url(#a)">
             <path
               fill="#2867B2"
@@ -58,7 +68,12 @@ const SocialLinks = () => {
         }}
         className="socialbutton"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 56 56" height="56">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 56 56"
+          height="56"
+        >
           <path
             fill="#1877F2"
             d="M48 28c0-11.046-8.954-20-20-20S8 16.954 8 28c0 9.983 7.314 18.257 16.875 19.757V33.78h-5.078V28h5.078v-4.406c0-5.013 2.986-7.782 7.554-7.782 2.188 0 4.477.391 4.477.391v4.922h-2.522c-2.484 0-3.259 1.542-3.259 3.123V28h5.547l-.887 5.781h-4.66v13.976C40.686 46.257 48 37.983 48 28Z"

@@ -1,9 +1,9 @@
-@import './_fonts.css';
-@import './_globals.css';
-@import './_buttons.css';
-@import './_reset.css';
-@import './_text.css';
-@import './_form.css';
+@import "./_fonts.css";
+@import "./_globals.css";
+@import "./_buttons.css";
+@import "./_reset.css";
+@import "./_text.css";
+@import "./_form.css";
 
 /* miscellaneous */
 .credentialpage {

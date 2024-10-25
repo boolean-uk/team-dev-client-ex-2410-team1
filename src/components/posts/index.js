@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
-import Post from '../post';
-import { getPosts } from '../../service/apiClient';
+import { useEffect, useState } from "react";
+import Post from "../post";
+import { getPosts } from "../../service/apiClient";
 
 const Posts = () => {
   const [posts, setPosts] = useState([]);

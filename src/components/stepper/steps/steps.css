@@ -10,7 +10,7 @@
   margin-bottom: 20px;
 }
 .steps:before {
-  content: '';
+  content: "";
   position: absolute;
   left: 36px;
   top: 50%;
