@@ -1,13 +1,13 @@
-import { useState } from 'react';
-import Button from '../../components/button';
-import TextInput from '../../components/form/textInput';
-import useAuth from '../../hooks/useAuth';
-import CredentialsCard from '../../components/credentials';
-import './login.css';
+import { useState } from "react";
+import Button from "../../components/button";
+import TextInput from "../../components/form/textInput";
+import useAuth from "../../hooks/useAuth";
+import CredentialsCard from "../../components/credentials";
+import "./login.css";
 
 const Login = () => {
   const { onLogin } = useAuth();
-  const [formData, setFormData] = useState({ email: '', password: '' });
+  const [formData, setFormData] = useState({ email: "", password: "" });
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -25,13 +25,18 @@ const Login = () => {
       >
         <div className="login-form">
           <form>
-            <TextInput value={formData.email} onChange={onChange} name="email" label={'Email *'} />
+            <TextInput
+              value={formData.email}
+              onChange={onChange}
+              name="email"
+              label={"Email *"}
+            />
             <TextInput
               value={formData.password}
               onChange={onChange}
               name="password"
-              label={'Password *'}
-              type={'password'}
+              label={"Password *"}
+              type={"password"}
             />
           </form>
           <Button

@@ -1,12 +1,12 @@
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
-const FullLogo = ({ textColour = '#000046' }) => {
+const FullLogo = ({ textColour = "#000046" }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 356 56"
-      style={{ maxWidth: '355px' }}
+      style={{ maxWidth: "355px" }}
     >
       <path
         fill={textColour}
@@ -21,7 +21,7 @@ const FullLogo = ({ textColour = '#000046' }) => {
 };
 
 FullLogo.propTypes = {
-  textColour: PropTypes.string
+  textColour: PropTypes.string,
 };
 
 export default FullLogo;

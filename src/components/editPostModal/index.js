@@ -1,19 +1,19 @@
-import { useState } from 'react';
-import useModal from '../../hooks/useModal';
-import './style.css';
-import Button from '../button';
+import { useState } from "react";
+import useModal from "../../hooks/useModal";
+import "./style.css";
+import Button from "../button";
 
 const EditPostModal = () => {
   const { closeModal } = useModal();
   const [message, setMessage] = useState(null);
-  const [text, setText] = useState('');
+  const [text, setText] = useState("");
 
   const onChange = (e) => {
     setText(e.target.value);
   };
 
   const onSubmit = () => {
-    setMessage('Submit button was clicked! Closing modal in 2 seconds...');
+    setMessage("Submit button was clicked! Closing modal in 2 seconds...");
 
     setTimeout(() => {
       setMessage(null);
@@ -33,14 +33,15 @@ const EditPostModal = () => {
       </section>
 
       <section>
-        <textarea onChange={onChange} value={text} placeholder="Edit your post"></textarea>
+        <textarea onChange={onChange} value={text} placeholder="Edit your post">
+        </textarea>
       </section>
 
       <section className="create-post-actions">
         <Button
           onClick={onSubmit}
           text="Post"
-          classes={`${text.length ? 'blue' : 'offwhite'} width-full`}
+          classes={`${text.length ? "blue" : "offwhite"} width-full`}
           disabled={!text.length}
         />
       </section>

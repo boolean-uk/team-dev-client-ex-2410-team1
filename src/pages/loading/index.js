@@ -1,5 +1,5 @@
-import FullLogo from '../../assets/fullLogo-whiteLines';
-import './loading.css';
+import FullLogo from "../../assets/fullLogo-whiteLines";
+import "./loading.css";
 
 const Dashboard = () => {
   return (

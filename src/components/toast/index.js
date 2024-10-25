@@ -1,8 +1,8 @@
-import { NavLink } from 'react-router-dom';
-import TickIcon from '../../assets/tickIcon';
-import './toast.css';
+import { NavLink } from "react-router-dom";
+import TickIcon from "../../assets/tickIcon";
+import "./toast.css";
 
-const Toast = ({ text = '', linkTo = '#nogo', linkText = '' }) => {
+const Toast = ({ text = "", linkTo = "#nogo", linkText = "" }) => {
   return (
     <div className="toast bg-blue">
       <TickIcon height={40} width={40} />

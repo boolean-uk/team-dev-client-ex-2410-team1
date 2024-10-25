@@ -1,11 +1,11 @@
-import ReactModal from 'react-modal';
-import useModal from '../../hooks/useModal';
-import style from './style.js';
-import './style.css';
+import ReactModal from "react-modal";
+import useModal from "../../hooks/useModal";
+import style from "./style.js";
+import "./style.css";
 
-ReactModal.setAppElement('#root');
+ReactModal.setAppElement("#root");
 
-const Modal = ({ width = '612px' }) => {
+const Modal = ({ width = "612px" }) => {
   const { isOpen, closeModal, modalComponent, modalHeader } = useModal();
 
   style.content.width = width;
