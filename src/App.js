@@ -20,8 +20,15 @@ const App = () => {
             <Route path="register" element={<Register />} />
             <Route path="loading" element={<Loading />} />
             <Route path="verification" element={<Verification />} />
-            <Route path="profile/:id" element={<ProfilePage />} />
 
+            <Route
+              path="profile/:id"
+              element={
+                <ProtectedRoute>
+                  <ProfilePage />
+                </ProtectedRoute>
+              }
+            />
             <Route
               index
               element={

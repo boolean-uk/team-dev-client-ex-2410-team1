@@ -23,7 +23,7 @@ const AuthProvider = ({ children }) => {
       setToken(storedToken);
       navigate(location.state?.from?.pathname || '/');
     }
-  }, [location.state?.from?.pathname, navigate]);
+  }, [location.state?.from?.pathname]);
 
   const handleLogin = async (email, password) => {
     const res = await login(email, password);
