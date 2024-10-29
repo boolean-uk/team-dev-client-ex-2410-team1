@@ -26,10 +26,10 @@ const AuthProvider = ({ children }) => {
     if (token) {
       const redirectPath = localStorage.getItem('redirectPath');
       if (redirectPath) {
-        localStorage.removeItem('redirectPath'); 
+        localStorage.removeItem('redirectPath');
         navigate(redirectPath);
       } else {
-        navigate('/'); 
+        navigate('/');
       }
     }
   }, [token]);
@@ -43,14 +43,11 @@ const AuthProvider = ({ children }) => {
 
     localStorage.setItem('token', res.data.token);
     setToken(res.data.token);
-
-    localStorage.removeItem('redirectPath');
     navigate('/');
   };
 
   const handleLogout = () => {
     localStorage.removeItem('token');
-    localStorage.removeItem('redirectPath');
     setToken(null);
   };
 
