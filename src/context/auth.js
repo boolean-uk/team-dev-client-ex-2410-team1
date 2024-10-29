@@ -43,14 +43,11 @@ const AuthProvider = ({ children }) => {
 
     localStorage.setItem('token', res.data.token);
     setToken(res.data.token);
-
-    localStorage.removeItem('redirectPath');
     navigate('/');
   };
 
   const handleLogout = () => {
     localStorage.removeItem('token');
-    localStorage.removeItem('redirectPath');
     setToken(null);
   };
 
