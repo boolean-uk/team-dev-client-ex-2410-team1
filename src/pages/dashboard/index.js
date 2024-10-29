@@ -13,6 +13,7 @@ const Dashboard = () => {
   const [searchVal, setSearchVal] = useState('');
   const navigate = useNavigate();
 
+  // Create a function to render the users when input changes in real-time also!!
   const onChange = (e) => {
     setSearchVal(e.target.value);
   };
