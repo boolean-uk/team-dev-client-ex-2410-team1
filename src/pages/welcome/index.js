@@ -3,9 +3,8 @@ import Stepper from '../../components/stepper';
 import useAuth from '../../hooks/useAuth';
 import StepOne from './stepOne';
 import StepTwo from './stepTwo';
-import StepFour from './stepFour';
-import './style.css';
 import StepThree from './stepThree';
+import './style.css';
 
 const WelcomeSignupForm = () => {
   const { onCreateProfile } = useAuth();
@@ -47,8 +46,7 @@ const WelcomeSignupForm = () => {
       <Stepper header={<WelcomeHeader />} onComplete={onComplete}>
         <StepOne data={profile} setData={onChange} />
         <StepTwo data={profile} setData={onChange} />
-        <StepThree data={profile} setData={onchange} />
-        <StepFour data={profile} setData={onChange} />
+        <StepThree data={profile} setData={onChange} />
       </Stepper>
     </main>
   );
