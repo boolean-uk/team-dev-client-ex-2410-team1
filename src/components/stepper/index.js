@@ -32,10 +32,10 @@ const Stepper = ({ header, children, onComplete }) => {
       {children[currentStep]}
 
       <div className="stepper-buttons">
-        <Button text="Back" classes="offwhite" onClick={onBackClick} />
+        {currentStep > 0 && <Button text="Back" classes="offwhite" onClick={onBackClick} />}
         <Button
           text={currentStep === children.length - 1 ? 'Submit' : 'Next'}
-          classes="blue"
+          classes="blue nextButton"
           onClick={onNextClick}
         />
       </div>
