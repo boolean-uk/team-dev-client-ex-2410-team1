@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Stepper from '../../components/stepper';
 import useAuth from '../../hooks/useAuth';
 import StepOne from './stepOne';
+import StepTwo from './stepTwo';
 import StepFour from './stepFour';
 import './style.css';
 
@@ -11,6 +12,7 @@ const WelcomeSignupForm = () => {
   const [profile, setProfile] = useState({
     firstName: '',
     lastName: '',
+    username: '',
     githubUsername: '',
     bio: ''
   });
@@ -25,7 +27,13 @@ const WelcomeSignupForm = () => {
   };
 
   const onComplete = () => {
-    onCreateProfile(profile.firstName, profile.lastName, profile.githubUsername, profile.bio);
+    onCreateProfile(
+      profile.firstName,
+      profile.lastName,
+      profile.username,
+      profile.githubUsername,
+      profile.bio
+    );
   };
 
   return (
@@ -37,6 +45,7 @@ const WelcomeSignupForm = () => {
 
       <Stepper header={<WelcomeHeader />} onComplete={onComplete}>
         <StepOne data={profile} setData={onChange} />
+        <StepTwo data={profile} setData={onChange} />
         <StepFour data={profile} setData={onChange} />
       </Stepper>
     </main>
