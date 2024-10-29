@@ -31,9 +31,6 @@ async function get(endpoint, auth = true) {
 }
 
 async function request(method, endpoint, data, auth = true) {
-  console.log('API_URL', API_URL);
-  console.log('method', method);
-  console.log('endpoint', endpoint);
   const opts = {
     headers: {
       'Content-Type': 'application/json'

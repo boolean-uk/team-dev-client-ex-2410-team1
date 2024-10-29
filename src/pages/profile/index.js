@@ -22,10 +22,6 @@ const ProfilePage = () => {
     fetchUserData();
   }, [id]);
 
-  useEffect(() => {
-    console.log('profile user', user);
-  }, [user]);
-
   return (
     <div>
       <h1>Profile Page</h1>
