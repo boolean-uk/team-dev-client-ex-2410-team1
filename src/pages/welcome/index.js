@@ -1,38 +1,32 @@
-import { useState } from 'react';
 import Stepper from '../../components/stepper';
 import useAuth from '../../hooks/useAuth';
 import StepOne from './stepOne';
 import StepTwo from './stepTwo';
 import StepThree from './stepThree';
 import './style.css';
+import useForm from '../../hooks/useForm';
 
 const WelcomeSignupForm = () => {
   const { onCreateProfile } = useAuth();
 
-  const [profile, setProfile] = useState({
-    firstName: '',
-    lastName: '',
-    username: '',
-    githubUsername: '',
-    bio: ''
-  });
+  const { formData, setFormData } = useForm();
 
   const onChange = (event) => {
     const { name, value } = event.target;
 
-    setProfile({
-      ...profile,
+    setFormData({
+      ...formData,
       [name]: value
     });
   };
 
   const onComplete = () => {
     onCreateProfile(
-      profile.firstName,
-      profile.lastName,
-      profile.username,
-      profile.githubUsername,
-      profile.bio
+      formData.firstName,
+      formData.lastName,
+      formData.username,
+      formData.githubUsername,
+      formData.bio
     );
   };
 
@@ -44,9 +38,9 @@ const WelcomeSignupForm = () => {
       </div>
 
       <Stepper header={<WelcomeHeader />} onComplete={onComplete}>
-        <StepOne data={profile} setData={onChange} />
-        <StepTwo data={profile} setData={onChange} />
-        <StepThree data={profile} setData={onChange} />
+        <StepOne data={formData} setData={onChange} />
+        <StepTwo data={formData} setData={onChange} />
+        <StepThree data={formData} setData={onChange} />
       </Stepper>
     </main>
   );

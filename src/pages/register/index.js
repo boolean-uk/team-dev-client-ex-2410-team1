@@ -1,13 +1,13 @@
-import { useState } from 'react';
 import Button from '../../components/button';
 import TextInput from '../../components/form/textInput';
 import useAuth from '../../hooks/useAuth';
 import CredentialsCard from '../../components/credentials';
 import './register.css';
+import useForm from '../../hooks/useForm';
 
 const Register = () => {
   const { onRegister } = useAuth();
-  const [formData, setFormData] = useState({ email: '', password: '' });
+  const { formData, setFormData } = useForm();
 
   const onChange = (e) => {
     const { name, value } = e.target;

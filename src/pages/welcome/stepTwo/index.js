@@ -1,10 +1,7 @@
 import Form from '../../../components/form';
 import TextInput from '../../../components/form/textInput';
-import useForm from '../../../hooks/useForm';
 
 const StepTwo = ({ data, setData }) => {
-  const { formData } = useForm();
-
   return (
     <>
       <div className="welcome-formheader">
@@ -12,13 +9,13 @@ const StepTwo = ({ data, setData }) => {
       </div>
       <Form className="welcome-form">
         <div className="welcome-form-inputs">
-          <TextInput onChange={setData} value={formData.email} name="email" label={'Email *'} />
+          <TextInput onChange={setData} value={data.email} name="email" label={'Email *'} />
 
           <TextInput onChange={setData} value={data.mobile} name="mobile" label={'Mobile *'} />
 
           <TextInput
             onChange={setData}
-            value={data.password}
+            value={data.newPassword}
             name="password"
             label={'New password *'}
           />
@@ -26,7 +23,7 @@ const StepTwo = ({ data, setData }) => {
           <TextInput
             onChange={setData}
             value={data.confirmPassword}
-            name="confirmPassword"
+            name="password"
             label={'Confirm new password *'}
           />
 
