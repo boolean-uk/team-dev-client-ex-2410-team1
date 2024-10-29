@@ -2,8 +2,6 @@ import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Avatar from '../../components/avatar';
 import { get } from '../../service/apiClient';
-// import { request } from '../../service/apiClient';
-// import { get } from '../../service/apiClient';
 
 const ProfilePage = () => {
   const { id } = useParams();
