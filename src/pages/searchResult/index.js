@@ -6,6 +6,7 @@ import TextInput from '../../components/form/textInput';
 import SearchIcon from '../../assets/icons/searchIcon';
 import { useState } from 'react';
 import { ArrowLeft } from 'react-feather';
+import ItemTeacherView from '../../components/search/listItem/ItemTeacherView';
 
 const SearchResult = () => {
   const location = useLocation();
@@ -38,6 +39,7 @@ const SearchResult = () => {
       <ItemStudentView />
       <ItemStudentView />
       <ItemStudentView />
+      <ItemTeacherView />
       {/* Render your search results here */}
     </div>
   );
