@@ -30,6 +30,12 @@ async function get(endpoint, auth = true) {
   return await request('GET', endpoint, null, auth);
 }
 
+async function getAllUsers(name = '') {
+  const query = name ? `?name=${name}` : '';
+  const res = await get(`users${query}`);
+  return res.data.users;
+}
+
 async function request(method, endpoint, data, auth = true) {
   const opts = {
     headers: {
@@ -52,4 +58,4 @@ async function request(method, endpoint, data, auth = true) {
   return response.json();
 }
 
-export { login, getPosts, register, createProfile };
+export { login, getPosts, register, createProfile, getAllUsers };
