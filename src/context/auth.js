@@ -14,6 +14,7 @@ const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const [token, setToken] = useState(null);
+  const [loggedInUser, setLoggedInUser] = useState(null);
 
   useEffect(() => {
     const storedToken = localStorage.getItem('token');
@@ -43,17 +44,23 @@ const AuthProvider = ({ children }) => {
 
     localStorage.setItem('token', res.data.token);
     setToken(res.data.token);
+
+    setLoggedInUser(res.data.user);
+
     navigate('/');
   };
 
   const handleLogout = () => {
     localStorage.removeItem('token');
     setToken(null);
+    setLoggedInUser(null);
   };
 
   const handleRegister = async (email, password) => {
     const res = await register(email, password);
     setToken(res.data.token);
+
+    setLoggedInUser(res.data.user);
 
     navigate('/verification');
   };
@@ -69,6 +76,7 @@ const AuthProvider = ({ children }) => {
 
   const value = {
     token,
+    loggedInUser,
     onLogin: handleLogin,
     onLogout: handleLogout,
     onRegister: handleRegister,
