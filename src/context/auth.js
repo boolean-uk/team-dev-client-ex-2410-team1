@@ -13,17 +13,26 @@ const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
-  const location = useLocation();
   const [token, setToken] = useState(null);
 
   useEffect(() => {
     const storedToken = localStorage.getItem('token');
-
     if (storedToken) {
       setToken(storedToken);
-      navigate(location.state?.from?.pathname || '/');
     }
-  }, [location.state?.from?.pathname]);
+  }, []);
+
+  useEffect(() => {
+    if (token) {
+      const redirectPath = localStorage.getItem('redirectPath');
+      if (redirectPath) {
+        localStorage.removeItem('redirectPath');
+        navigate(redirectPath);
+      } else {
+        navigate('/');
+      }
+    }
+  }, [token]);
 
   const handleLogin = async (email, password) => {
     const res = await login(email, password);
@@ -33,9 +42,8 @@ const AuthProvider = ({ children }) => {
     }
 
     localStorage.setItem('token', res.data.token);
-
-    setToken(res.token);
-    navigate(location.state?.from?.pathname || '/');
+    setToken(res.data.token);
+    navigate('/');
   };
 
   const handleLogout = () => {
@@ -75,6 +83,9 @@ const ProtectedRoute = ({ children }) => {
   const location = useLocation();
 
   if (!token) {
+    if (!localStorage.getItem('redirectPath')) {
+      localStorage.setItem('redirectPath', location.pathname);
+    }
     return <Navigate to={'/login'} replace state={{ from: location }} />;
   }
 
