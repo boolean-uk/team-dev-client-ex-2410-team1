@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import SearchIcon from '../../assets/icons/searchIcon';
 import Button from '../../components/button';
 import Card from '../../components/card';
@@ -7,9 +7,15 @@ import TextInput from '../../components/form/textInput';
 import Posts from '../../components/posts';
 import useModal from '../../hooks/useModal';
 import './style.css';
+import { getPosts, post } from '../../service/apiClient';
 
 const Dashboard = () => {
   const [searchVal, setSearchVal] = useState('');
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    getPosts().then(setPosts);
+  }, []);
 
   const onChange = (e) => {
     setSearchVal(e.target.value);
@@ -21,10 +27,15 @@ const Dashboard = () => {
   // Create a function to run on user interaction
   const showModal = () => {
     // Use setModal to set the header of the modal and the component the modal should render
-    setModal('Create a post', <CreatePostModal />); // CreatePostModal is just a standard React component, nothing special
+    setModal('Create a post', <CreatePostModal addPost={addNewPost} />); // CreatePostModal is just a standard React component, nothing special
 
     // Open the modal!
     openModal();
+  };
+
+  const addNewPost = async (text) => {
+    await post('posts', { content: text });
+    getPosts().then(setPosts);
   };
 
   return (
@@ -39,7 +50,7 @@ const Dashboard = () => {
           </div>
         </Card>
 
-        <Posts />
+        <Posts posts={posts} />
       </main>
 
       <aside>
