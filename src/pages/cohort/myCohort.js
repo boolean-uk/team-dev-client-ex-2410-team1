@@ -17,8 +17,6 @@ const MyCohort = () => {
 
         setStudents(studentList);
         setTeachers(teacherList);
-
-        console.log(users);
       } catch (error) {}
     }
 
