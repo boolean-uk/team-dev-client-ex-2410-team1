@@ -26,7 +26,9 @@ const ItemTeacherView = () => {
           Move to cohort
         </button>
 
-        <button className="dotdot-btn">...</button>
+        <p className="dotdot-btn" onClick={() => console.log('Modal')}>
+          ...
+        </p>
         {/* Opens modal, see figma */}
       </div>
     </div>

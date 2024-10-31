@@ -6,7 +6,7 @@ import TextInput from '../../components/form/textInput';
 import SearchIcon from '../../assets/icons/searchIcon';
 import { useEffect, useState } from 'react';
 import { ArrowLeft, XCircle } from 'react-feather';
-import ItemTeacherView from '../../components/search/listItem/ItemTeacherView';
+// import ItemTeacherView from '../../components/search/listItem/ItemTeacherView';
 import { getAllUsers } from '../../service/apiClient';
 import useAuth from '../../hooks/useAuth';
 
@@ -48,29 +48,32 @@ const SearchResult = () => {
         </button>
         <h2>Search Results</h2>
       </div>
-      <Card>
-        <form onSubmit={(e) => e.preventDefault()}>
-          <TextInput
-            icon={<SearchIcon />}
-            value={value}
-            name="Search"
-            onChange={onChange}
-            placeholder="Search"
-          />
-          <button type="button" onClick={() => setValue('')}>
-            <XCircle size={30} />
-          </button>
-        </form>
-      </Card>
-      <div className="search-results">
-        {users.map((user) => {
-          if (loggedInUser.role === 'STUDENT') {
-            console.log(loggedInUser.role);
-            return <ItemStudentView key={user.id} user={user} />;
-          } else {
-            return <ItemTeacherView key={user.id} user={user} />;
-          }
-        })}
+      <div className="page-info">
+        <Card>
+          <form onSubmit={(e) => e.preventDefault()} className="search-form">
+            <TextInput icon={<SearchIcon />} value={value} name="Search" onChange={onChange} />
+            <button type="button" className="clear-btn" onClick={() => setValue('')}>
+              <XCircle size={30} />
+            </button>
+          </form>
+        </Card>
+        <div className="search-results">
+          <p className="people-text">People</p>
+          <hr />
+          {users.length > 0 ? (
+            users
+              .filter((u) => u.id !== loggedInUser.id)
+              .map((user) => {
+                if (loggedInUser.role === 'STUdENT') {
+                  return <ItemStudentView key={user.id} user={user} />;
+                } else {
+                  return <ItemStudentView key={user.id} user={user} />;
+                }
+              })
+          ) : (
+            <h3>No results found</h3>
+          )}
+        </div>
       </div>
     </div>
   );

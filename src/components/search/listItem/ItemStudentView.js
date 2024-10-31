@@ -9,7 +9,8 @@ const ItemStudentView = ({ user }) => {
     <div className="view-container">
       <div className="image">
         <p>
-          {user.firstName[0].toUpperCase()} {user.lastName[0].toUpperCase()}
+          {user?.firstName?.[0]?.toUpperCase() || ''}
+          {user?.lastName?.[0]?.toUpperCase() || ''}
         </p>
       </div>
       <div className="userInfo">
@@ -24,7 +25,9 @@ const ItemStudentView = ({ user }) => {
         <button className="profile-btn" onClick={() => navigate(`/profile/${user.id}`)}>
           Profile
         </button>
-        <button className="dotdot-btn">...</button>
+        <p className="dotdot-btn" onClick={() => console.log('Modal')}>
+          ...
+        </p>
         {/* Opens modal, see figma */}
       </div>
     </div>
