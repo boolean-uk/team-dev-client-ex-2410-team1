@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Avatar from '../../components/avatar';
-import { get, patch } from '../../service/apiClient';
+import { getUserById, patch } from '../../service/apiClient';
 import useAuth from '../../hooks/useAuth';
 import jwtDecode from 'jwt-decode';
 import Form from '../../components/form';
@@ -21,7 +21,7 @@ const ProfilePage = () => {
   useEffect(() => {
     const fetchUserData = async (profileId, setter) => {
       try {
-        const response = await get(`users/${profileId}`);
+        const response = await getUserById(profileId);
         setter(response.data);
       } catch (error) {
         console.error(`Error fetching user data for ID ${profileId}:`, error);

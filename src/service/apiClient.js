@@ -30,6 +30,10 @@ async function get(endpoint, auth = true) {
   return await request('GET', endpoint, null, auth);
 }
 
+async function getUserById(id) {
+  return await get(`users/${id}`);
+}
+
 async function request(method, endpoint, data, auth = true) {
   const opts = {
     headers: {
@@ -52,4 +56,4 @@ async function request(method, endpoint, data, auth = true) {
   return response.json();
 }
 
-export { login, getPosts, register, createProfile, request, get, post, patch };
+export { login, getPosts, register, createProfile, request, get, post, patch, getUserById };
