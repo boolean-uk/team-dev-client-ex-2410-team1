@@ -13,17 +13,32 @@ const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
-  const location = useLocation();
   const [token, setToken] = useState(null);
+  const [loggedInUser, setLoggedInUser] = useState(null);
 
   useEffect(() => {
     const storedToken = localStorage.getItem('token');
+    const storedUser = localStorage.getItem('loggedInUser');
 
     if (storedToken) {
       setToken(storedToken);
-      navigate(location.state?.from?.pathname || '/');
     }
-  }, [location.state?.from?.pathname, navigate]);
+    if (storedUser) {
+      setLoggedInUser(JSON.parse(storedUser));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (token) {
+      const redirectPath = localStorage.getItem('redirectPath');
+      if (redirectPath) {
+        localStorage.removeItem('redirectPath');
+        navigate(redirectPath);
+      } else {
+        navigate('/');
+      }
+    }
+  }, [token]);
 
   const handleLogin = async (email, password) => {
     const res = await login(email, password);
@@ -33,27 +48,54 @@ const AuthProvider = ({ children }) => {
     }
 
     localStorage.setItem('token', res.data.token);
+    localStorage.setItem('loggedInUser', JSON.stringify(res.data.user));
 
-    setToken(res.token);
-    navigate(location.state?.from?.pathname || '/');
+    setToken(res.data.token);
+    setLoggedInUser(res.data.user);
+
+    navigate('/');
   };
 
   const handleLogout = () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('loggedInUser');
+
     setToken(null);
+    setLoggedInUser(null);
   };
 
   const handleRegister = async (email, password) => {
     const res = await register(email, password);
     setToken(res.data.token);
 
+    localStorage.setItem('loggedInUser', JSON.stringify(res.data.user));
+    setLoggedInUser(res.data.user);
+
     navigate('/verification');
   };
 
+  // TODO: Update me with correct fields when Create Profile Page is done
   const handleCreateProfile = async (firstName, lastName, githubUrl, bio) => {
     const { userId } = jwt_decode(token);
 
     await createProfile(userId, firstName, lastName, githubUrl, bio);
+
+    const existingUserString = localStorage.getItem('loggedInUser');
+    let existingUser = {};
+    if (existingUserString) {
+      existingUser = JSON.parse(existingUserString);
+    }
+
+    const updatedUser = {
+      ...existingUser,
+      firstName,
+      lastName,
+      githubUrl,
+      bio
+    };
+
+    localStorage.setItem('loggedInUser', JSON.stringify(updatedUser));
+    setLoggedInUser(updatedUser);
 
     localStorage.setItem('token', token);
     navigate('/');
@@ -61,6 +103,7 @@ const AuthProvider = ({ children }) => {
 
   const value = {
     token,
+    loggedInUser,
     onLogin: handleLogin,
     onLogout: handleLogout,
     onRegister: handleRegister,
@@ -75,6 +118,9 @@ const ProtectedRoute = ({ children }) => {
   const location = useLocation();
 
   if (!token) {
+    if (!localStorage.getItem('redirectPath')) {
+      localStorage.setItem('redirectPath', location.pathname);
+    }
     return <Navigate to={'/login'} replace state={{ from: location }} />;
   }
 

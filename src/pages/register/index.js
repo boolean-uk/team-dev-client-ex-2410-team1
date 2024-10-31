@@ -3,15 +3,30 @@ import TextInput from '../../components/form/textInput';
 import useAuth from '../../hooks/useAuth';
 import CredentialsCard from '../../components/credentials';
 import './register.css';
-import useForm from '../../hooks/useForm';
+import { isValidEmail, isValidPassword } from '../../validation/validation';
+import ErrorBox from '../../validation/ErrorBox';
 
 const Register = () => {
   const { onRegister } = useAuth();
-  const { formData, setFormData } = useForm();
+  const [formData, setFormData] = useState({ email: '', password: '' });
+  const [emailError, setEmailError] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
 
   const onChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+  };
+
+  const handleRegister = (email, password) => {
+    const emailValid = isValidEmail(email);
+    const passwordValid = isValidPassword(password);
+
+    setEmailError(!emailValid);
+    setPasswordError(!passwordValid);
+
+    if (emailValid && passwordValid) {
+      onRegister(email, password);
+    }
   };
 
   return (
@@ -32,6 +47,7 @@ const Register = () => {
               name="email"
               label={'Email *'}
             />
+            {emailError && <ErrorBox message="Invalid email address." />}
             <TextInput
               value={formData.password}
               onChange={onChange}
@@ -39,10 +55,13 @@ const Register = () => {
               label={'Password *'}
               type={'password'}
             />
+            {passwordError && (
+              <ErrorBox message="Invalid password. It must be at least 8 characters long, contain at least one uppercase letter, one number, and one special character." />
+            )}
           </form>
           <Button
             text="Sign up"
-            onClick={() => onRegister(formData.email, formData.password)}
+            onClick={() => handleRegister(formData.email, formData.password)}
             classes="green width-full"
           />
         </div>

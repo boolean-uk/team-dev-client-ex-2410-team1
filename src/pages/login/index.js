@@ -4,14 +4,30 @@ import TextInput from '../../components/form/textInput';
 import useAuth from '../../hooks/useAuth';
 import CredentialsCard from '../../components/credentials';
 import './login.css';
+import { isValidEmail, isValidPassword } from '../../validation/validation';
+import ErrorBox from '../../validation/ErrorBox';
 
 const Login = () => {
   const { onLogin } = useAuth();
   const [formData, setFormData] = useState({ email: '', password: '' });
+  const [emailError, setEmailError] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
 
   const onChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+  };
+
+  const handleLogin = (email, password) => {
+    const emailValid = isValidEmail(email);
+    const passwordValid = isValidPassword(password);
+
+    setEmailError(!emailValid);
+    setPasswordError(!passwordValid);
+
+    if (emailValid && passwordValid) {
+      onLogin(email, password);
+    }
   };
 
   return (
@@ -25,7 +41,14 @@ const Login = () => {
       >
         <div className="login-form">
           <form>
-            <TextInput value={formData.email} onChange={onChange} name="email" label={'Email *'} />
+            <TextInput
+              value={formData.email}
+              onChange={onChange}
+              name="email"
+              label={'Email *'}
+              type={'email'}
+            />
+            {emailError && <ErrorBox message="Invalid email address." />}
             <TextInput
               value={formData.password}
               onChange={onChange}
@@ -33,10 +56,13 @@ const Login = () => {
               label={'Password *'}
               type={'password'}
             />
+            {passwordError && (
+              <ErrorBox message="Invalid password. It must be at least 8 characters long, contain at least one uppercase letter, one number, and one special character." />
+            )}
           </form>
           <Button
             text="Log in"
-            onClick={() => onLogin(formData.email, formData.password)}
+            onClick={() => handleLogin(formData.email, formData.password)}
             classes="green width-full"
           />
         </div>
