@@ -35,7 +35,6 @@ const WelcomeSignupForm = () => {
   };
 
   const onComplete = () => {
-    console.log(formData);
     onCreateProfile(
       formData.firstName,
       formData.lastName,
