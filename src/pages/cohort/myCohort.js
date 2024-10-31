@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { get } from '../../service/apiClient';
 import './myCohort.css';
 
 const MyCohort = () => {
@@ -6,16 +7,22 @@ const MyCohort = () => {
   const [teachers, setTeachers] = useState([]);
 
   useEffect(() => {
-    fetch('YOUR_STUDENTS_API_URL') // Replace with actual students API endpoint
-      .then((response) => response.json())
-      .then((data) => setStudents(data))
-      .catch((error) => console.error('Error fetching students:', error));
+    async function fetchUsers() {
+      try {
+        const res = await get('users');
+        const users = res.data;
 
-    // Fetch teachers data
-    fetch('YOUR_TEACHERS_API_URL') // Replace with actual teachers API endpoint
-      .then((response) => response.json())
-      .then((data) => setTeachers(data))
-      .catch((error) => console.error('Error fetching teachers:', error));
+        const studentList = users.filter((user) => user.role === 'STUDENT');
+        const teacherList = users.filter((user) => user.role === 'TEACHER');
+
+        setStudents(studentList);
+        setTeachers(teacherList);
+
+        console.log(users);
+      } catch (error) {}
+    }
+
+    fetchUsers();
   }, []);
 
   return (
@@ -29,8 +36,13 @@ const MyCohort = () => {
           <div className="student-list">
             {students.map((student, index) => (
               <div className="student-item" key={index}>
-                <div className="initials">{student.initials}</div>
-                <div className="name">{student.name}</div>
+                <div className="initials">
+                  {student.firstName[0]}
+                  {student.lastName[0]}
+                </div>
+                <div className="name">
+                  {student.firstName} {student.lastName}
+                </div>
                 <div className="menu">...</div>
               </div>
             ))}
@@ -44,9 +56,15 @@ const MyCohort = () => {
           <h2>Teachers</h2>
           {teachers.map((teacher, index) => (
             <div className="teacher-item" key={index}>
-              <div className="initials">{teacher.initials}</div>
-              <div className="name">{teacher.name}</div>
-              <div className="subject">{teacher.subject}</div>
+              <div className="initials">
+                {teacher.firstName[0]}
+                {teacher.lastName[0]}
+              </div>
+              <div className="name">
+                {teacher.firstName}
+                {teacher.lastName}
+              </div>
+              <div className="subject">{teacher.specialism}</div>
               <div className="menu">...</div>
             </div>
           ))}
