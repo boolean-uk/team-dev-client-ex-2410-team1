@@ -52,13 +52,11 @@ const AuthProvider = ({ children }) => {
     localStorage.setItem('token', res.data.token);
     setToken(res.data.token);
     setLoggedInUser(res.data.user);
-    localStorage.removeItem('redirectPath');
     navigate('/');
   };
 
   const handleLogout = () => {
     localStorage.removeItem('token');
-    localStorage.removeItem('redirectPath');
     setToken(null);
     setLoggedInUser(null);
   };

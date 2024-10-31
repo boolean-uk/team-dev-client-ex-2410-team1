@@ -37,7 +37,7 @@ const ProfilePage = () => {
 
   useEffect(() => {
     if (profileUser && loggedInUser) {
-      setCanEdit(profileUser.id === loggedInUser.id || loggedInUser.role === 'teacher');
+      setCanEdit(profileUser.id === loggedInUser.id || loggedInUser.role === 'TEACHER');
     }
   }, [profileUser, loggedInUser]);
 
