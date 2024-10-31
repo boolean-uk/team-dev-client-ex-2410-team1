@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import Avatar from '../../components/avatar';
 import { getUserById, patchUserById } from '../../service/apiClient';
 import useAuth from '../../hooks/useAuth';
-import jwtDecode from 'jwt-decode';
 import Form from '../../components/form';
 import TextInput from '../../components/form/textInput';
 
@@ -12,8 +11,8 @@ import './styles.css';
 const ProfilePage = () => {
   const { id } = useParams();
   const [profileUser, setProfileUser] = useState(null);
-  const [loggedInUser, setLoggedInUser] = useState(null);
-  const { token } = useAuth();
+  // const [loggedInUser, setLoggedInUser] = useState(null);
+  const { loggedInUser } = useAuth();
   const [canEdit, setCanEdit] = useState(false);
   const [formData, setFormData] = useState(null);
   const [prevProfileUserId, setPrevProfileUserId] = useState(null); // New state variable
@@ -28,12 +27,8 @@ const ProfilePage = () => {
       }
     };
 
-    if (token) {
-      const loggedInId = jwtDecode(token).userId;
-      fetchUserData(id, setProfileUser); // Fetch profile user data
-      fetchUserData(loggedInId, setLoggedInUser); // Fetch logged-in user data
-    }
-  }, [id, token]);
+    fetchUserData(id, setProfileUser);
+  }, [id]);
 
   useEffect(() => {
     if (profileUser && loggedInUser) {
