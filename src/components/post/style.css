@@ -45,6 +45,13 @@
   grid-template-columns: 1fr 1fr;
 }
 
+.like-btn {
+  display: flex;
+}
+.comment-btn {
+  display: flex;
+}
+
 .post-interactions-container p {
   text-align: right;
 }

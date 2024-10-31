@@ -4,6 +4,7 @@ import Comment from '../comment';
 import EditPostModal from '../editPostModal';
 import ProfileCircle from '../profileCircle';
 import './style.css';
+import { Heart, MessageCircle } from 'react-feather';
 
 const Post = ({ name, date, content, comments = [], likes = 0 }) => {
   const { openModal, setModal } = useModal();
@@ -39,8 +40,14 @@ const Post = ({ name, date, content, comments = [], likes = 0 }) => {
           className={`post-interactions-container border-top ${comments.length ? 'border-bottom' : null}`}
         >
           <div className="post-interactions">
-            <div>Like</div>
-            <div>Comment</div>
+            <div className="like-btn">
+              <Heart size={20} cursor="pointer" />
+              <p>Like</p>
+            </div>
+            <div className="comment-btn">
+              <MessageCircle size={20} cursor="pointer" />
+              <p>Comment</p>
+            </div>
           </div>
 
           <p>{!likes && 'Be the first to like this'}</p>
