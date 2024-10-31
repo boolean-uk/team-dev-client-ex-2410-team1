@@ -1,10 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import { get } from '../../service/apiClient';
 import './myCohort.css';
+import useAuth from '../../hooks/useAuth';
+import jwtDecode from 'jwt-decode';
 
 const MyCohort = () => {
   const [students, setStudents] = useState([]);
   const [teachers, setTeachers] = useState([]);
+  const [loggedInUser, setLoggedInUser] = useState([]);
+  const { token } = useAuth();
+
+  useEffect(() => {
+    const loggedInId = jwtDecode(token).userId;
+
+    async function fetchUser() {
+      try {
+        const res = await get(`users/${loggedInId}`);
+        const user = res.data;
+        setLoggedInUser(user);
+      } catch (error) {}
+    }
+
+    fetchUser();
+  }, [token]);
 
   useEffect(() => {
     async function fetchUsers() {
@@ -13,8 +31,12 @@ const MyCohort = () => {
         const users = res.data;
         console.log(users);
 
-        const studentList = users.filter((user) => user.role === 'STUDENT');
-        const teacherList = users.filter((user) => user.role === 'TEACHER');
+        const studentList = users.filter(
+          (user) => user.role === 'STUDENT' && user.cohort_id === loggedInUser.cohort_id
+        );
+        const teacherList = users.filter(
+          (user) => user.role === 'TEACHER' && user.cohort_id === loggedInUser.cohort_id
+        );
 
         setStudents(studentList);
         setTeachers(teacherList);
@@ -29,7 +51,7 @@ const MyCohort = () => {
       <div className="cohort-content">
         <div className="cohort-section">
           <h1>My Cohort</h1>
-          <h4>Software Development, Cohort 4</h4>
+          <h4>Software Development, Cohort {loggedInUser.cohort_id}</h4>
           <p>January 2023 - June 2023</p>
           <div className="student-list">
             {students.map((student, index) => (
