@@ -31,9 +31,10 @@ async function get(endpoint, auth = true) {
 }
 
 async function getAllUsers(name = '') {
+  console.log('getting users with name,', name);
   const query = name ? `?name=${name}` : '';
   const res = await get(`users${query}`);
-  return res.data.users;
+  return res.data;
 }
 
 async function request(method, endpoint, data, auth = true) {
@@ -58,4 +59,4 @@ async function request(method, endpoint, data, auth = true) {
   return response.json();
 }
 
-export { login, getPosts, register, createProfile, getAllUsers };
+export { login, getPosts, register, createProfile, getAllUsers, get };
