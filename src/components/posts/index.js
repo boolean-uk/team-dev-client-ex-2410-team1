@@ -1,7 +1,6 @@
 import Post from '../post';
 
 const Posts = ({ posts }) => {
-  console.log(posts);
   return (
     <>
       {posts
@@ -11,10 +10,10 @@ const Posts = ({ posts }) => {
           return (
             <Post
               key={post.id}
+              id={post.id}
               name={`${post.author.firstName} ${post.author.lastName}`}
               date={post.createdAt}
               content={post.content}
-              comments={post.comments}
             />
           );
         })}

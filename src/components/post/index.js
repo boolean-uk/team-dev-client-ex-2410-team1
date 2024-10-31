@@ -3,10 +3,15 @@ import Card from '../card';
 import Comment from '../comment';
 import EditPostModal from '../editPostModal';
 import ProfileCircle from '../profileCircle';
+import NewComment from '../newComment';
 import './style.css';
 import { Heart, MessageCircle } from 'react-feather';
+import { getComments } from '../../service/apiClient';
+import { useState, useEffect } from 'react';
 
-const Post = ({ name, date, content, comments = [], likes = 0 }) => {
+const Post = ({ id, name, date, content, likes = 0 }) => {
+  const [allComments, setAllComments] = useState([]);
+
   const { openModal, setModal } = useModal();
 
   const userInitials = name.match(/\b(\w)/g);
@@ -15,6 +20,19 @@ const Post = ({ name, date, content, comments = [], likes = 0 }) => {
     setModal('Edit post', <EditPostModal />);
     openModal();
   };
+
+  useEffect(() => {
+    const fetchComments = async () => {
+      try {
+        const result = await getComments(id);
+        setAllComments(result);
+      } catch (error) {
+        console.log('Failed to fetch all comments: ' + error);
+      }
+    };
+
+    fetchComments();
+  }, []);
 
   return (
     <Card>
@@ -37,7 +55,7 @@ const Post = ({ name, date, content, comments = [], likes = 0 }) => {
         </section>
 
         <section
-          className={`post-interactions-container border-top ${comments.length ? 'border-bottom' : null}`}
+          className={`post-interactions-container border-top ${allComments.length ? 'border-bottom' : null}`}
         >
           <div className="post-interactions">
             <div className="like-btn">
@@ -54,10 +72,19 @@ const Post = ({ name, date, content, comments = [], likes = 0 }) => {
         </section>
 
         <section>
-          {comments.map((comment) => (
-            <Comment key={comment.id} name={comment.name} content={comment.content} />
+          {allComments.map((comment) => (
+            <Comment
+              key={comment.id}
+              name={
+                comment.author.firstName && comment.author.lastName
+                  ? `${comment.author.firstName} ${comment.author.lastName}`
+                  : 'SAKKI Boiiii'
+              }
+              content={comment.content}
+            />
           ))}
         </section>
+        <NewComment postId={id} />
       </article>
     </Card>
   );

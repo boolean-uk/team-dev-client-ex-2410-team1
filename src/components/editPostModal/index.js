@@ -25,10 +25,10 @@ const EditPostModal = () => {
     <>
       <section className="create-post-user-details">
         <div className="profile-icon">
-          <p>AJ</p>
+          <p>AJ</p> {/* TODO */}
         </div>
         <div className="post-user-name">
-          <p>Alex J</p>
+          <p>Alex J</p> {/* TODO */}
         </div>
       </section>
 

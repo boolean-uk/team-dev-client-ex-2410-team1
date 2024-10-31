@@ -44,7 +44,7 @@ const Dashboard = () => {
         <Card>
           <div className="create-post-input">
             <div className="profile-icon">
-              <p>AJ</p>
+              <p>AJ</p> {/* TODO */}
             </div>
             <Button text="What's on your mind?" onClick={showModal} />
           </div>
