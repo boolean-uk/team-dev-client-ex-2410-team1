@@ -5,7 +5,7 @@ import EditPostModal from '../editPostModal';
 import ProfileCircle from '../profileCircle';
 import NewComment from '../newComment';
 import './style.css';
-import { Heart, MessageCircle } from 'react-feather';
+import { Heart, MessageSquare } from 'react-feather';
 import { getComments } from '../../service/apiClient';
 import { useState, useEffect } from 'react';
 
@@ -21,16 +21,16 @@ const Post = ({ id, name, date, content, likes = 0 }) => {
     openModal();
   };
 
-  useEffect(() => {
-    const fetchComments = async () => {
-      try {
-        const result = await getComments(id);
-        setAllComments(result);
-      } catch (error) {
-        console.log('Failed to fetch all comments: ' + error);
-      }
-    };
+  const fetchComments = async () => {
+    try {
+      const result = await getComments(id);
+      setAllComments(result);
+    } catch (error) {
+      console.log('Failed to fetch all comments: ' + error);
+    }
+  };
 
+  useEffect(() => {
     fetchComments();
   }, []);
 
@@ -60,11 +60,16 @@ const Post = ({ id, name, date, content, likes = 0 }) => {
           <div className="post-interactions">
             <div className="like-btn">
               <Heart size={20} cursor="pointer" />
-              <p>Like</p>
+
+              <div className="btn-text">
+                <p>Like</p>
+              </div>
             </div>
             <div className="comment-btn">
-              <MessageCircle size={20} cursor="pointer" />
-              <p>Comment</p>
+              <MessageSquare size={20} cursor="pointer" />
+              <div className="btn-text">
+                <p>Comment</p>
+              </div>
             </div>
           </div>
 
@@ -72,19 +77,17 @@ const Post = ({ id, name, date, content, likes = 0 }) => {
         </section>
 
         <section>
+          <p className="previous-text">See previous comments</p>
+
           {allComments.map((comment) => (
             <Comment
               key={comment.id}
-              name={
-                comment.author.firstName && comment.author.lastName
-                  ? `${comment.author.firstName} ${comment.author.lastName}`
-                  : 'SAKKI Boiiii'
-              }
+              name={`${comment.author.firstName} ${comment.author.lastName}`}
               content={comment.content}
             />
           ))}
         </section>
-        <NewComment postId={id} />
+        <NewComment postId={id} onCommentAdded={fetchComments} />
       </article>
     </Card>
   );

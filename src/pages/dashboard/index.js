@@ -8,10 +8,14 @@ import Posts from '../../components/posts';
 import useModal from '../../hooks/useModal';
 import './style.css';
 import { getPosts, post } from '../../service/apiClient';
+import useAuth from '../../hooks/useAuth';
+import ProfileCircle from '../../components/profileCircle';
 
 const Dashboard = () => {
   const [searchVal, setSearchVal] = useState('');
   const [posts, setPosts] = useState([]);
+  const { loggedInUser } = useAuth();
+  const userInitials = `${loggedInUser.firstName[0]}${loggedInUser.lastName[0]}`;
 
   useEffect(() => {
     getPosts().then(setPosts);
@@ -43,9 +47,8 @@ const Dashboard = () => {
       <main>
         <Card>
           <div className="create-post-input">
-            <div className="profile-icon">
-              <p>AJ</p> {/* TODO */}
-            </div>
+            <ProfileCircle initials={userInitials} />
+
             <Button text="What's on your mind?" onClick={showModal} />
           </div>
         </Card>
