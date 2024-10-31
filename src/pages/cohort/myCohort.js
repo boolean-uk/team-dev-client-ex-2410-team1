@@ -29,7 +29,6 @@ const MyCohort = () => {
       try {
         const res = await get('users');
         const users = res.data;
-        console.log(users);
 
         const studentList = users.filter(
           (user) => user.role === 'STUDENT' && user.cohort_id === loggedInUser.cohort_id
@@ -44,7 +43,7 @@ const MyCohort = () => {
     }
 
     fetchUsers();
-  }, []);
+  }, [loggedInUser]);
 
   return (
     <div className="cohort-page">
