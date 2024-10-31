@@ -5,6 +5,7 @@ import StepTwo from './stepTwo';
 import StepThree from './stepThree';
 import './style.css';
 import useForm from '../../hooks/useForm';
+import { useState } from 'react';
 
 const WelcomeSignupForm = () => {
   const { onCreateProfile } = useAuth();
@@ -18,6 +19,12 @@ const WelcomeSignupForm = () => {
       ...formData,
       [name]: value
     });
+  };
+
+  const [stepIsValid, setStepIsValid] = useState(false);
+
+  const validateStep = (isValid) => {
+    setStepIsValid(isValid);
   };
 
   const onComplete = () => {
@@ -37,10 +44,10 @@ const WelcomeSignupForm = () => {
         <p className="text-blue1">Create your profile to get started</p>
       </div>
 
-      <Stepper header={<WelcomeHeader />} onComplete={onComplete}>
-        <StepOne data={formData} setData={onChange} />
-        <StepTwo data={formData} setData={onChange} />
-        <StepThree data={formData} setData={onChange} />
+      <Stepper header={<WelcomeHeader />} onComplete={onComplete} stepIsValid={stepIsValid}>
+        <StepOne data={formData} setData={onChange} validateStep={validateStep} />
+        <StepTwo data={formData} setData={onChange} validateStep={validateStep} />
+        <StepThree data={formData} setData={onChange} validateStep={validateStep} />
       </Stepper>
     </main>
   );

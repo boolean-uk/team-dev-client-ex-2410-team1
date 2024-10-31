@@ -6,12 +6,11 @@ const FormProvider = ({ children }) => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
-    newPassword: '',
-    confirmPassword: '',
     firstName: '',
     lastName: '',
     username: '',
     githubUsername: '',
+    mobile: '',
     bio: ''
   });
 
