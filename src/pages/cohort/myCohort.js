@@ -11,6 +11,7 @@ const MyCohort = () => {
       try {
         const res = await get('users');
         const users = res.data;
+        console.log(users);
 
         const studentList = users.filter((user) => user.role === 'STUDENT');
         const teacherList = users.filter((user) => user.role === 'TEACHER');
@@ -35,8 +36,8 @@ const MyCohort = () => {
             {students.map((student, index) => (
               <div className="student-item" key={index}>
                 <div className="initials">
-                  {student.firstName[0]}
-                  {student.lastName[0]}
+                  {student.firstName ? student.firstName[0] : '?'}
+                  {student.lastName ? student.lastName[0] : '?'}
                 </div>
                 <div className="name">
                   {student.firstName} {student.lastName}
@@ -55,8 +56,8 @@ const MyCohort = () => {
           {teachers.map((teacher, index) => (
             <div className="teacher-item" key={index}>
               <div className="initials">
-                {teacher.firstName[0]}
-                {teacher.lastName[0]}
+                {teacher.firstName ? teacher.firstName[0] : '?'}
+                {teacher.lastName ? teacher.lastName[0] : '?'}
               </div>
               <div className="name">
                 {teacher.firstName}
