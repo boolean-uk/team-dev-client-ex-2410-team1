@@ -50,8 +50,11 @@ const AuthProvider = ({ children }) => {
     }
 
     localStorage.setItem('token', res.data.token);
+    localStorage.setItem('loggedInUser', JSON.stringify(res.data));
+
     setToken(res.data.token);
-    setLoggedInUser(res.data.user);
+    setLoggedInUser(res.data);
+
     navigate('/');
   };
 
@@ -65,17 +68,24 @@ const AuthProvider = ({ children }) => {
     const res = await register(email, password);
     setToken(res.data.token);
 
-    localStorage.setItem('loggedInUser', JSON.stringify(res.data.user));
-    setLoggedInUser(res.data.user);
+    localStorage.setItem('loggedInUser', JSON.stringify(res.data));
+    setLoggedInUser(res.data);
 
+    localStorage.setItem('redirectPath', '/verification');
     navigate('/verification');
   };
 
-  // TODO: Update me with correct fields when Create Profile Page is done
-  const handleCreateProfile = async (firstName, lastName, githubUrl, bio) => {
+  const handleCreateProfile = async (
+    firstName,
+    lastName,
+    username,
+    githubUsername,
+    mobile,
+    bio
+  ) => {
     const { userId } = jwt_decode(token);
 
-    await createProfile(userId, firstName, lastName, githubUrl, bio);
+    await createProfile(userId, firstName, lastName, username, githubUsername, mobile, bio);
 
     const existingUserString = localStorage.getItem('loggedInUser');
     let existingUser = {};
@@ -87,7 +97,9 @@ const AuthProvider = ({ children }) => {
       ...existingUser,
       firstName,
       lastName,
-      githubUrl,
+      username,
+      githubUsername,
+      mobile,
       bio
     };
 
