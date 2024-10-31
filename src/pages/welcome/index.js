@@ -4,13 +4,20 @@ import StepOne from './stepOne';
 import StepTwo from './stepTwo';
 import StepThree from './stepThree';
 import './style.css';
-import useForm from '../../hooks/useForm';
 import { useState } from 'react';
 
 const WelcomeSignupForm = () => {
-  const { onCreateProfile } = useAuth();
+  const { onCreateProfile, loggedInUser } = useAuth();
 
-  const { formData, setFormData } = useForm();
+  const [formData, setFormData] = useState({
+    email: loggedInUser.email,
+    firstName: '',
+    lastName: '',
+    username: '',
+    githubUsername: '',
+    mobile: '',
+    bio: ''
+  });
 
   const onChange = (event) => {
     const { name, value } = event.target;
@@ -33,6 +40,7 @@ const WelcomeSignupForm = () => {
       formData.lastName,
       formData.username,
       formData.githubUsername,
+      formData.mobile,
       formData.bio
     );
   };

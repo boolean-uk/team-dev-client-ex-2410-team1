@@ -15,12 +15,11 @@ const App = () => {
     <>
       <AuthProvider>
         <ModalProvider>
-          <FormProvider>
-            <Routes>
-              <Route path="login" element={<Login />} />
-              <Route path="register" element={<Register />} />
-              <Route path="loading" element={<Loading />} />
-              <Route path="verification" element={<Verification />} />
+          <Routes>
+            <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
+            <Route path="loading" element={<Loading />} />
+            <Route path="verification" element={<Verification />} />
 
             <Route
               path="profile/:id"

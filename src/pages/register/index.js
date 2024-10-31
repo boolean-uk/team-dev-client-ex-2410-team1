@@ -5,6 +5,7 @@ import CredentialsCard from '../../components/credentials';
 import './register.css';
 import { isValidEmail, isValidPassword } from '../../validation/validation';
 import ErrorBox from '../../validation/ErrorBox';
+import { useState } from 'react';
 
 const Register = () => {
   const { onRegister } = useAuth();
