@@ -18,9 +18,6 @@ const Header = () => {
   const [cohort, setCohort] = useState(0);
 
   useEffect(() => {
-    console.log('logged in', loggedInUser);
-    console.log('logged in role', loggedInUser.role);
-    console.log('name', loggedInUser.firstName + ' ' + loggedInUser.lastName);
     setUserName(loggedInUser.firstName + ' ' + loggedInUser.lastName);
     setInitials(loggedInUser.firstName.charAt(0) + loggedInUser.lastName.charAt(0));
     setJob(loggedInUser.jobTitle || 'Student');
