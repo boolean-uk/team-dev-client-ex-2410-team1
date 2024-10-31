@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Avatar from '../../components/avatar';
-import { getUserById, patch } from '../../service/apiClient';
+import { getUserById, patchUserById } from '../../service/apiClient';
 import useAuth from '../../hooks/useAuth';
 import jwtDecode from 'jwt-decode';
 import Form from '../../components/form';
@@ -71,7 +71,7 @@ const ProfilePage = () => {
 
     if (Object.keys(changeData).length > 0) {
       try {
-        const response = await patch(`users/${profileUser.id}`, changeData);
+        const response = await patchUserById(profileUser.id, changeData);
         console.log('Response:', response);
 
         // Update profileUser and formData with the new data
