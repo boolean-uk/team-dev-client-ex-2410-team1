@@ -1,34 +1,31 @@
-import './itemStyles.css';
+import './itemStudentStyles.css';
 import { useNavigate } from 'react-router-dom';
+import ProfileCircle from '../../profileCircle';
 
 const ItemStudentView = ({ user }) => {
-  // fetch students from the database
   const navigate = useNavigate();
 
   return (
-    <div className="view-container">
-      <div className="image">
+    <div className="view-container2">
+      <div className="image2">
         <p>
           {user?.firstName?.[0]?.toUpperCase() || ''}
           {user?.lastName?.[0]?.toUpperCase() || ''}
         </p>
       </div>
-      <div className="userInfo">
-        <p className="name-text">
+      <div className="userInfo2">
+        <p className="name-text2">
           {user.firstName} {user.lastName}
         </p>
-        <p className="info-text">
+        <p className="info-text2">
           {user.specialism}, Cohort {user.cohort_id}
         </p>
       </div>
-      <div className="button-container">
-        <button className="profile-btn" onClick={() => navigate(`/profile/${user.id}`)}>
+      <div className="button-container2">
+        <button className="profile-btn2" onClick={() => navigate(`/profile/${user.id}`)}>
           Profile
         </button>
-        <p className="dotdot-btn" onClick={() => console.log('Modal')}>
-          ...
-        </p>
-        {/* Opens modal, see figma */}
+        <ProfileCircle initials="..." className="edit-icon2" />
       </div>
     </div>
   );

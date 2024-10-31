@@ -37,7 +37,6 @@
   flex-direction: column;
   margin-left: 250px;
   width: 100%;
-  max-width: 800px; /* Ensure it doesn't exceed the max width */
   height: 100%;
 }
 
@@ -87,4 +86,7 @@
   font-size: 16pt;
   font-weight: bold;
   color: #000046;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
 }

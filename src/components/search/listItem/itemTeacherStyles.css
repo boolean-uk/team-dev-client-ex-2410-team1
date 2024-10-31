@@ -1,0 +1,73 @@
+.view-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: white;
+  height: 100%;
+  width: 100%;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.image {
+  flex-shrink: 0;
+  border-radius: 50%;
+  background-color: lightblue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+  width: 60px;
+  margin-right: 1rem;
+}
+
+.userInfo {
+  flex-grow: 1; /* Allows the text to take available space */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-right: 1rem;
+}
+
+.name-text {
+  font-size: 16pt;
+  font-weight: bold;
+}
+
+.info-text {
+  font-size: 12pt;
+  color: gray;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between; /* Ensures even spacing */
+  gap: 0.5rem;
+}
+
+.profile-btn {
+  color: gray;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  flex: 1; /* Each button takes up equal width */
+}
+
+.profile-btn:hover {
+  background-color: #f0f5fa;
+  border-radius: 4px;
+}
+
+.dotdot-btn {
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  background-color: #f0f5fa;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  text-align: center;
+}

@@ -14,18 +14,18 @@ const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const [token, setToken] = useState(null);
-  // const [loggedInUser, setLoggedInUser] = useState(null);
+  const [loggedInUser, setLoggedInUser] = useState(null);
 
   useEffect(() => {
     const storedToken = localStorage.getItem('token');
-    // const storedUser = localStorage.getItem('loggedInUser');
+    const storedUser = localStorage.getItem('loggedInUser');
 
     if (storedToken) {
       setToken(storedToken);
     }
-    // if (storedUser) {
-    //   setLoggedInUser(JSON.parse(storedUser));
-    // }
+    if (storedUser) {
+      setLoggedInUser(JSON.parse(storedUser));
+    }
   }, []);
 
   useEffect(() => {
@@ -61,7 +61,7 @@ const AuthProvider = ({ children }) => {
     localStorage.removeItem('loggedInUser');
 
     setToken(null);
-    // setLoggedInUser(null);
+    setLoggedInUser(null);
   };
 
   const handleRegister = async (email, password) => {
@@ -104,7 +104,7 @@ const AuthProvider = ({ children }) => {
     };
 
     localStorage.setItem('loggedInUser', JSON.stringify(updatedUser));
-    // setLoggedInUser(updatedUser);
+    setLoggedInUser(updatedUser);
 
     localStorage.setItem('token', token);
     navigate('/');
@@ -112,7 +112,7 @@ const AuthProvider = ({ children }) => {
 
   const value = {
     token,
-    // loggedInUser,
+    loggedInUser,
     onLogin: handleLogin,
     onLogout: handleLogout,
     onRegister: handleRegister,

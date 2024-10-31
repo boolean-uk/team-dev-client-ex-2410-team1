@@ -1,4 +1,4 @@
-import './itemStyles.css';
+import './itemTeacherStyles.css';
 import { useNavigate } from 'react-router-dom';
 
 const ItemTeacherView = ({ user }) => {
