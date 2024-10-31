@@ -27,10 +27,9 @@ const MyCohort = () => {
   return (
     <div className="cohort-page">
       <div className="cohort-content">
-        <h1>My Cohort</h1>
-
         <div className="cohort-section">
-          <h2>Software Development, Cohort 4</h2>
+          <h1>My Cohort</h1>
+          <h4>Software Development, Cohort 4</h4>
           <p>January 2023 - June 2023</p>
           <div className="student-list">
             {students.map((student, index) => (
@@ -42,7 +41,6 @@ const MyCohort = () => {
                 <div className="name">
                   {student.firstName} {student.lastName}
                 </div>
-                <div className="menu">...</div>
               </div>
             ))}
           </div>
@@ -64,7 +62,6 @@ const MyCohort = () => {
                 {teacher.lastName}
               </div>
               <div className="subject">{teacher.specialism}</div>
-              <div className="menu">...</div>
             </div>
           ))}
         </div>
