@@ -45,7 +45,6 @@ const Header = () => {
           <Card>
             <section className="post-details">
               <div className="profile-icon">
-                {/* was AJ */}
                 <p>{initials}</p>
               </div>
 

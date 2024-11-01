@@ -11,11 +11,10 @@ import './styles.css';
 const ProfilePage = () => {
   const { id } = useParams();
   const [profileUser, setProfileUser] = useState(null);
-  // const [loggedInUser, setLoggedInUser] = useState(null);
   const { loggedInUser } = useAuth();
   const [canEdit, setCanEdit] = useState(false);
   const [formData, setFormData] = useState(null);
-  const [prevProfileUserId, setPrevProfileUserId] = useState(null); // New state variable
+  const [prevProfileUserId, setPrevProfileUserId] = useState(null);
 
   useEffect(() => {
     const fetchUserData = async (profileId, setter) => {
@@ -63,7 +62,8 @@ const ProfilePage = () => {
         changeData[key] = formData[key];
       }
     });
-
+    // changeData['bio'] = changeData['biography']; // Rename bio to biography
+    changeData.bio = changeData.biography; // Rename bio to biography
     if (Object.keys(changeData).length > 0) {
       try {
         await patchUserById(profileUser.id, changeData);
@@ -207,7 +207,7 @@ const ProfilePage = () => {
                 name="password"
                 label="Password"
                 type="password"
-                readOnly={true} // Always read-only for security?
+                readOnly={true} // Always read-only for security
               />
             </Form>
 
@@ -221,14 +221,21 @@ const ProfilePage = () => {
                 label="ID"
                 readOnly={true} // IDs are not editable
               />
-              <TextInput
-                value={formData.biography}
-                onChange={handleInputChange}
-                name="biography"
-                label="Biography"
-                readOnly={!canEdit}
-                multiline
-              />
+
+              {/* Replaced Biography Field */}
+              <div>
+                <label htmlFor="biography">Biography</label>
+                <textarea
+                  id="biography"
+                  placeholder="Tell us about yourself, your professional and educational highlights to date..."
+                  maxLength={300}
+                  name="biography"
+                  value={formData.biography}
+                  onChange={handleInputChange}
+                  readOnly={!canEdit}
+                ></textarea>
+                <p>{(formData.biography || '').length}/300</p>
+              </div>
             </Form>
           </div>
 
@@ -239,7 +246,6 @@ const ProfilePage = () => {
             </div>
             <div>
               {canEdit && (
-                // <div className="divider">
                 <div className="buttons">
                   <button onClick={() => setFormData({ ...profileUser })}>Cancel</button>
                   <button onClick={handleSave}>Save</button>
