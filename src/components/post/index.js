@@ -11,6 +11,9 @@ import { useState, useEffect } from 'react';
 
 const Post = ({ id, name, date, content, likes = 0 }) => {
   const [allComments, setAllComments] = useState([]);
+  const [showAllComments, setShowAllComments] = useState(false);
+  const commentsToDisplay = showAllComments ? allComments : allComments.slice(0, 3);
+  const [isRed, setIsRed] = useState(false);
 
   const { openModal, setModal } = useModal();
 
@@ -33,7 +36,9 @@ const Post = ({ id, name, date, content, likes = 0 }) => {
   useEffect(() => {
     fetchComments();
   }, []);
-
+  const toggleColor = () => {
+    setIsRed(!isRed);
+  };
   return (
     <Card>
       <article className="post">
@@ -59,7 +64,12 @@ const Post = ({ id, name, date, content, likes = 0 }) => {
         >
           <div className="post-interactions">
             <div className="like-btn">
-              <Heart size={20} cursor="pointer" />
+              <Heart
+                size={20}
+                cursor="pointer"
+                onClick={toggleColor}
+                fill={isRed ? 'red' : 'white'}
+              />
 
               <div className="btn-text">
                 <p>Like</p>
@@ -76,17 +86,26 @@ const Post = ({ id, name, date, content, likes = 0 }) => {
           <p>{!likes && 'Be the first to like this'}</p>
         </section>
 
-        <section>
-          <p className="previous-text">See previous comments</p>
+        <div className="comment-section">
+          {allComments.length > 3 && (
+            <p
+              className="link"
+              onClick={() => setShowAllComments((prev) => !prev)}
+              style={{ cursor: 'pointer' }}
+            >
+              {showAllComments ? `Hide comments` : `See all comments (${allComments.length})`}
+            </p>
+          )}
 
-          {allComments.map((comment) => (
+          {commentsToDisplay.map((comment) => (
             <Comment
               key={comment.id}
               name={`${comment.author.firstName} ${comment.author.lastName}`}
               content={comment.content}
             />
           ))}
-        </section>
+        </div>
+
         <NewComment postId={id} onCommentAdded={fetchComments} />
       </article>
     </Card>
