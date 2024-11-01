@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import SearchIcon from '../../assets/icons/searchIcon';
 import Button from '../../components/button';
 import Card from '../../components/card';
@@ -15,11 +15,16 @@ const Dashboard = () => {
   const [searchVal, setSearchVal] = useState('');
   const [posts, setPosts] = useState([]);
   const { loggedInUser } = useAuth();
-  const userInitials = `${loggedInUser.firstName[0]}${loggedInUser.lastName[0]}`;
+  // const userInitials = `${loggedInUser.firstName[0]}${loggedInUser.lastName[0]}`;
+  const [initials, setInitials] = useState('');
 
   useEffect(() => {
     getPosts().then(setPosts);
   }, []);
+
+  useEffect(() => {
+    setInitials(loggedInUser.firstName.charAt(0) + loggedInUser.lastName.charAt(0));
+  }, [loggedInUser]);
 
   const onChange = (e) => {
     setSearchVal(e.target.value);
@@ -47,8 +52,9 @@ const Dashboard = () => {
       <main>
         <Card>
           <div className="create-post-input">
-            <ProfileCircle initials={userInitials} />
-
+            <div className="profile-icon">
+              <p>{initials}</p>
+            </div>
             <Button text="What's on your mind?" onClick={showModal} />
           </div>
         </Card>

@@ -1,31 +1,48 @@
-import { useState } from 'react';
 import Stepper from '../../components/stepper';
 import useAuth from '../../hooks/useAuth';
 import StepOne from './stepOne';
 import StepTwo from './stepTwo';
+import StepThree from './stepThree';
 import './style.css';
+import { useState } from 'react';
 
 const WelcomeSignupForm = () => {
-  const { onCreateProfile } = useAuth();
+  const { onCreateProfile, loggedInUser } = useAuth();
 
-  const [profile, setProfile] = useState({
+  const [formData, setFormData] = useState({
+    email: loggedInUser.email,
     firstName: '',
     lastName: '',
+    username: '',
     githubUsername: '',
+    mobile: '',
     bio: ''
   });
 
   const onChange = (event) => {
     const { name, value } = event.target;
 
-    setProfile({
-      ...profile,
+    setFormData({
+      ...formData,
       [name]: value
     });
   };
 
+  const [stepIsValid, setStepIsValid] = useState(false);
+
+  const validateStep = (isValid) => {
+    setStepIsValid(isValid);
+  };
+
   const onComplete = () => {
-    onCreateProfile(profile.firstName, profile.lastName, profile.githubUsername, profile.bio);
+    onCreateProfile(
+      formData.firstName,
+      formData.lastName,
+      formData.username,
+      formData.githubUsername,
+      formData.mobile,
+      formData.bio
+    );
   };
 
   return (
@@ -35,9 +52,10 @@ const WelcomeSignupForm = () => {
         <p className="text-blue1">Create your profile to get started</p>
       </div>
 
-      <Stepper header={<WelcomeHeader />} onComplete={onComplete}>
-        <StepOne data={profile} setData={onChange} />
-        <StepTwo data={profile} setData={onChange} />
+      <Stepper header={<WelcomeHeader />} onComplete={onComplete} stepIsValid={stepIsValid}>
+        <StepOne data={formData} setData={onChange} validateStep={validateStep} />
+        <StepTwo data={formData} setData={onChange} validateStep={validateStep} />
+        <StepThree data={formData} setData={onChange} validateStep={validateStep} />
       </Stepper>
     </main>
   );

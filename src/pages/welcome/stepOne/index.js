@@ -1,8 +1,26 @@
+import { useEffect } from 'react';
 import ProfileIcon from '../../../assets/icons/profileIcon';
 import Form from '../../../components/form';
 import TextInput from '../../../components/form/textInput';
+import UploadPhotoModal from '../../../components/uploadPhotoModal';
+import useModal from '../../../hooks/useModal';
 
-const StepOne = ({ data, setData }) => {
+const StepOne = ({ data, setData, validateStep }) => {
+  const { openModal, setModal } = useModal();
+  const showModal = () => {
+    setModal('Upload photo', <UploadPhotoModal />);
+    openModal();
+  };
+
+  useEffect(() => {
+    const isValid =
+      data.firstName !== '' &&
+      data.lastName !== '' &&
+      data.username !== '' &&
+      data.githubUsername !== '';
+    validateStep(isValid);
+  }, [data, validateStep]);
+
   return (
     <>
       <div className="welcome-formheader">
@@ -13,7 +31,9 @@ const StepOne = ({ data, setData }) => {
           <p className="text-blue1">Photo</p>
           <div className="welcome-form-profileimg-input">
             <ProfileIcon colour="#28C846" background="#64DC78" />
-            <p className="text-blue1">Add headshot</p>
+            <p className="text-blue1" onClick={showModal}>
+              Add headshot
+            </p>
           </div>
           <p className="welcome-form-profileimg-error">Please upload a valid image file</p>
         </div>
@@ -22,14 +42,26 @@ const StepOne = ({ data, setData }) => {
             onChange={setData}
             value={data.firstName}
             name="firstName"
-            label={'First name'}
+            label={'First name *'}
           />
-          <TextInput onChange={setData} value={data.lastName} name="lastName" label={'Last name'} />
+          <TextInput
+            onChange={setData}
+            value={data.lastName}
+            name="lastName"
+            label={'Last name *'}
+          />
+          <TextInput
+            onChange={setData}
+            value={data.username}
+            name="username"
+            label={'Username *'}
+          />
+
           <TextInput
             onChange={setData}
             value={data.githubUsername}
             name="githubUsername"
-            label={'Github Username'}
+            label={'Github Username *'}
           />
           <p className="text-blue1">*Required</p>
         </div>

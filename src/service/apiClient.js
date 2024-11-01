@@ -9,8 +9,15 @@ async function register(email, password) {
   return await login(email, password);
 }
 
-async function createProfile(userId, firstName, lastName, githubUrl, bio) {
-  return await patch(`users/${userId}`, { firstName, lastName, githubUrl, bio });
+async function createProfile(userId, firstName, lastName, username, githubUsername, mobile, bio) {
+  return await patch(`users/${userId}`, {
+    firstName,
+    lastName,
+    username,
+    githubUsername,
+    mobile,
+    bio
+  });
 }
 
 async function getPosts() {
@@ -31,8 +38,16 @@ async function patch(endpoint, data, auth = true) {
   return await request('PATCH', endpoint, data, auth);
 }
 
+async function patchUserById(userId, data) {
+  return await patch(`users/${userId}`, data);
+}
+
 async function get(endpoint, auth = true) {
   return await request('GET', endpoint, null, auth);
+}
+
+async function getUserById(id) {
+  return await get(`users/${id}`);
 }
 
 async function request(method, endpoint, data, auth = true) {
@@ -57,4 +72,4 @@ async function request(method, endpoint, data, auth = true) {
   return response.json();
 }
 
-export { login, getPosts, register, createProfile, post, get, getComments };
+export { login, getPosts, register, createProfile, patchUserById, getUserById, post, get, getComments };

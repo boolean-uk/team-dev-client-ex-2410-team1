@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import useModal from '../../hooks/useModal';
 import './style.css';
 import Button from '../button';
@@ -13,6 +13,15 @@ const CreatePostModal = ({ addPost }) => {
   const [text, setText] = useState('');
   const { loggedInUser } = useAuth();
   const userInitials = `${loggedInUser.firstName[0]}${loggedInUser.lastName[0]}`;
+
+  const { loggedInUser } = useAuth();
+  const [userName, setUserName] = useState('');
+  const [initials, setInitials] = useState('');
+
+  useEffect(() => {
+    setUserName(loggedInUser.firstName + ' ' + loggedInUser.lastName[0]);
+    setInitials(loggedInUser.firstName.charAt(0) + loggedInUser.lastName.charAt(0));
+  }, [loggedInUser]);
 
   const onChange = (e) => {
     setText(e.target.value);
@@ -30,10 +39,11 @@ const CreatePostModal = ({ addPost }) => {
   return (
     <>
       <section className="create-post-user-details">
-        <ProfileCircle initials={userInitials} />
-
+        <div className="profile-icon">
+          <p>{initials}</p>
+        </div>
         <div className="post-user-name">
-          {loggedInUser.firstName} {loggedInUser.lastName}
+          <p>{userName}</p>
         </div>
       </section>
 
