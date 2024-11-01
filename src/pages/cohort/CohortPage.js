@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { getCohortsById } from '../../service/apiClient';
 import './CohortPage.css';
 import useAuth from '../../hooks/useAuth';
+import { NavLink } from 'react-router-dom';
 
 const MyCohort = () => {
   const [students, setStudents] = useState([]);
@@ -38,9 +39,11 @@ const MyCohort = () => {
                   {student.firstName ? student.firstName[0] : '?'}
                   {student.lastName ? student.lastName[0] : '?'}
                 </div>
-                <div className="name">
-                  {student.firstName} {student.lastName}
-                </div>
+                <NavLink className="nameLink" to={`/profile/${student.id}`}>
+                  <div className="name">
+                    {student.firstName} {student.lastName}
+                  </div>
+                </NavLink>
               </div>
             ))}
           </div>
@@ -57,9 +60,12 @@ const MyCohort = () => {
                 {teacher.firstName ? teacher.firstName[0] : '?'}
                 {teacher.lastName ? teacher.lastName[0] : '?'}
               </div>
-              <div className="name">
-                {teacher.firstName} {teacher.lastName}
-              </div>
+              <NavLink className="nameLink" to={`/profile/${teacher.id}`}>
+                <div className="name">
+                  {teacher.firstName} {teacher.lastName}
+                </div>
+              </NavLink>
+
               <div className="subject">{teacher.specialism}</div>
             </div>
           ))}
