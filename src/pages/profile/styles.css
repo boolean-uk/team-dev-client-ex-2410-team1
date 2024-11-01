@@ -1,0 +1,100 @@
+/* Existing Styles */
+
+.info {
+  background-color: white;
+  margin: 20px auto; /* Centers the info box horizontally */
+  margin-left: 20px;
+  width: 89vw; /* 90% of the viewport width */
+  height: 71vh; /* 90% of the viewport height */
+  box-sizing: border-box; /* Includes padding and border in the total width and height */
+  padding: 20px; /* Adds internal padding */
+  overflow: auto; /* Enables scrolling if content overflows */
+  margin-left: 10px!;
+}
+
+.divider {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 30px;
+  justify-content: space-between; /* Distributes space between items */
+  align-items: center; /* Vertically centers items within the divider */
+}
+
+/* Corrected .r Class */
+.r {
+  flex: 1; /* Takes up all available horizontal space */
+  display: flex;
+  align-items: center; /* Vertically centers the content */
+}
+
+form {
+  /* Add the top border */
+  border-top: 1px solid #ccc; /* Adjust the color and thickness as needed */
+  padding-top: 50px;
+}
+
+.basic-info-form,
+.professional-info-form,
+.training-info-form,
+.contact-info-form,
+.additional-info-form {
+  align-self: start;
+  flex: 1;
+  min-width: 300px;
+}
+
+img {
+  border-radius: 50%;
+}
+
+h2 {
+  padding-bottom: 20px;
+}
+
+Avatar {
+  padding-left: 20px;
+}
+
+/* Updated .buttons Class */
+.buttons {
+  display: flex;
+  gap: 10px;
+  padding: 20px 0;
+  justify-content: flex-start;
+  width: 100%; /* Ensures the buttons span the full width */
+}
+
+.buttons button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.buttons button:first-of-type {
+  background-color: #f0f5fa;
+  color: white;
+}
+
+.buttons button:last-of-type {
+  background-color: #000046;
+  color: white;
+}
+
+.buttons button:hover {
+  opacity: 0.9; /* Slight transparency on hover for feedback */
+}
+
+.required {
+  flex: 1;
+  min-width: 300px;
+  display: flex;
+  align-items: center;
+}
+
+h1 {
+  padding-left: 20px;
+  padding-top: 20px;
+}
