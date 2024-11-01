@@ -10,16 +10,23 @@ import Menu from '../menu';
 import MenuItem from '../menu/menuItem';
 import './style.css';
 
-const ProfileCircle = ({ initials }) => {
+const ProfileCircle = (props) => {
   const [isMenuVisible, setIsMenuVisible] = useState(false);
+  const { initials, imageUrl } = props;
+  console.log('imageUrl', imageUrl);
+  console.log('initials', initials);
 
   return (
     <div className="profile-circle" onClick={() => setIsMenuVisible(!isMenuVisible)}>
       {isMenuVisible && <CascadingMenu />}
 
-      <div className="profile-icon">
-        <p>{initials}</p>
-      </div>
+      {imageUrl ? (
+        <img src={imageUrl} alt="Profile" />
+      ) : (
+        <div className="profile-icon">
+          <p>{initials}</p>
+        </div>
+      )}
     </div>
   );
 };

@@ -18,7 +18,7 @@ const Avatar = ({ user }) => {
   return (
     <>
       <section className="post-details">
-        <ProfileCircle initials={userInitials} />
+        <ProfileCircle initials={userInitials} imageUrl={user.imageUrl} />
         <div className="post-user-name">
           <p>{name}</p>
           <small>{user?.specialism || 'Software Developer'}</small>
