@@ -19,7 +19,6 @@ const ProfilePage = () => {
   const fetchUserData = async (profileId, setter) => {
     try {
       const response = await getUserById(profileId);
-      console.log('User data:', response.data);
       setter(response.data);
     } catch (error) {
       console.error(`Error fetching user data for ID ${profileId}:`, error);

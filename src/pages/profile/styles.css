@@ -20,6 +20,10 @@
   padding: 30px;
   justify-content: space-between; /* Distributes space between items */
   align-items: center; /* Vertically centers items within the divider */
+  img {
+    border-radius: 50%;
+    width: px;
+  }
 }
 
 /* Corrected .r Class */
@@ -45,9 +49,6 @@ form {
   min-width: 300px;
 }
 
-img {
-  border-radius: 50%;
-}
 
 h2 {
   padding-bottom: 20px;

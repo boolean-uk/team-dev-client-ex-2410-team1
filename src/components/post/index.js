@@ -9,14 +9,12 @@ import { Heart, MessageSquare } from 'react-feather';
 import { getComments } from '../../service/apiClient';
 import { useState, useEffect } from 'react';
 
-const Post = ({ id, name, date, content, likes = 0 }) => {
+const Post = ({ id, name, date, content, likes = 0, imageUrl }) => {
   const [allComments, setAllComments] = useState([]);
   const [showAllComments, setShowAllComments] = useState(false);
   const commentsToDisplay = showAllComments ? allComments : allComments.slice(0, 3);
   const [isRed, setIsRed] = useState(false);
-
   const { openModal, setModal } = useModal();
-
   const userInitials = name.match(/\b(\w)/g);
 
   const showModal = () => {
@@ -44,7 +42,6 @@ const Post = ({ id, name, date, content, likes = 0 }) => {
       <article className="post">
         <section className="post-details">
           <ProfileCircle initials={userInitials} />
-
           <div className="post-user-name">
             <p>{name}</p>
             <small>{date}</small>

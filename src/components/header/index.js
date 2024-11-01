@@ -9,19 +9,20 @@ import { NavLink } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 const Header = () => {
-  const { token, onLogout } = useAuth();
+  const { token, onLogout, loggedInUser } = useAuth();
   const [isMenuVisible, setIsMenuVisible] = useState(false);
-  const { loggedInUser } = useAuth();
   const [userName, setUserName] = useState('');
   const [initials, setInitials] = useState('');
   const [job, setJob] = useState('');
   const [cohortid, setCohort] = useState(0);
 
   useEffect(() => {
-    setUserName(loggedInUser.firstName + ' ' + loggedInUser.lastName);
-    setInitials(loggedInUser.firstName.charAt(0) + loggedInUser.lastName.charAt(0));
-    setJob(loggedInUser.jobTitle || 'Student');
-    setCohort(loggedInUser.cohort_id || 0);
+    if (loggedInUser) {
+      setUserName(`${loggedInUser.firstName} ${loggedInUser.lastName}`);
+      setInitials(`${loggedInUser.firstName.charAt(0)}${loggedInUser.lastName.charAt(0)}`);
+      setJob(loggedInUser.jobTitle || 'Student');
+      setCohort(loggedInUser.cohort_id || 0);
+    }
   }, [loggedInUser]);
 
   const onClickProfileIcon = () => {
@@ -37,8 +38,11 @@ const Header = () => {
       <FullLogo textColour="white" />
 
       <div className="profile-icon" onClick={onClickProfileIcon}>
-        {/* <p>{initials}</p> */}
-        <img src={loggedInUser.imageUrl}></img>
+        {loggedInUser.imageUrl ? (
+          <img src={loggedInUser.imageUrl} alt="Profile" />
+        ) : (
+          <p>{initials}</p>
+        )}
       </div>
 
       {isMenuVisible && (
@@ -46,8 +50,11 @@ const Header = () => {
           <Card>
             <section className="post-details">
               <div className="profile-icon">
-                {/* <p>{initials}</p> */}
-                <img src={loggedInUser.imageUrl}></img>
+                {loggedInUser.imageUrl ? (
+                  <img src={loggedInUser.imageUrl} alt="Profile" />
+                ) : (
+                  <p>{initials}</p>
+                )}
               </div>
 
               <div className="post-user-name">

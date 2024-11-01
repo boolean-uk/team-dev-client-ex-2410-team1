@@ -53,7 +53,11 @@ const Dashboard = () => {
         <Card>
           <div className="create-post-input">
             <div className="profile-icon">
-              <p>{initials}</p>
+              {loggedInUser.imageUrl ? (
+                <img src={loggedInUser.imageUrl} alt="Profile" />
+              ) : (
+                <p>{initials}</p>
+              )}
             </div>
             <Button text="What's on your mind?" onClick={showModal} />
           </div>

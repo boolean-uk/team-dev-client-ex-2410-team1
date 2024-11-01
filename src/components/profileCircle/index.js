@@ -13,8 +13,6 @@ import './style.css';
 const ProfileCircle = (props) => {
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const { initials, imageUrl } = props;
-  console.log('imageUrl', imageUrl);
-  console.log('initials', initials);
 
   return (
     <div className="profile-circle" onClick={() => setIsMenuVisible(!isMenuVisible)}>

@@ -14,6 +14,7 @@ const Posts = ({ posts }) => {
               name={`${post.author.firstName} ${post.author.lastName}`}
               date={post.createdAt}
               content={post.content}
+              posterid={post.author.id}
             />
           );
         })}
