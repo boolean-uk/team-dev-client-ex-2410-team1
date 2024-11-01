@@ -45,6 +45,27 @@
   grid-template-columns: 1fr 1fr;
 }
 
+.like-btn {
+  display: flex;
+  margin-right: 10px;
+}
+
+.btn-text {
+  margin-left: 5px;
+}
+
+.comment-btn {
+  display: flex;
+}
+
+.previous-text {
+  margin-bottom: 25px;
+}
+
 .post-interactions-container p {
   text-align: right;
+}
+
+.link {
+  margin-bottom: 30px;
 }
