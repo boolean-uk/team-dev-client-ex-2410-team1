@@ -18,10 +18,14 @@ const Header = () => {
   const [cohort, setCohort] = useState(0);
 
   useEffect(() => {
-    setUserName(loggedInUser.firstName + ' ' + loggedInUser.lastName);
-    setInitials(loggedInUser.firstName.charAt(0) + loggedInUser.lastName.charAt(0));
-    setJob(loggedInUser.specialism || 'Student');
-    setCohort(loggedInUser.cohort_id || 0);
+    if (!loggedInUser.firstName && !loggedInUser.lastName) {
+      setInitials('BK');
+    } else {
+      setUserName(loggedInUser.firstName + ' ' + loggedInUser.lastName);
+      setInitials(loggedInUser.firstName.charAt(0) + loggedInUser.lastName.charAt(0));
+      setJob(loggedInUser.specialism || 'Student');
+      setCohort(loggedInUser.cohort_id || 0);
+    }
   }, [loggedInUser]);
 
   const onClickProfileIcon = () => {
