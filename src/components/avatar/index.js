@@ -2,12 +2,9 @@ import { useEffect, useState } from 'react';
 import ProfileCircle from '../profileCircle';
 
 import './styles.css';
-import useAuth from '../../hooks/useAuth';
-
 const Avatar = ({ user }) => {
   const [userInitials, setUserInitials] = useState('');
   const [name, setName] = useState('');
-  const { loggedInUser } = useAuth();
 
   useEffect(() => {
     if (user) {
@@ -20,8 +17,8 @@ const Avatar = ({ user }) => {
   return (
     <>
       <section className="post-details">
-        {loggedInUser.imageUrl ? (
-          <img src={loggedInUser.imageUrl} alt="Profile" />
+        {user.imageUrl ? (
+          <img src={user.imageUrl} alt="Profile" />
         ) : (
           <ProfileCircle initials={userInitials} imageUrl={user.imageUrl} />
         )}
