@@ -1,5 +1,6 @@
 main {
   padding: 30px;
+  min-width: 780px;
 }
 
 aside {
@@ -24,5 +25,34 @@ aside {
   img {
     width: 50px;
     height: 50px;
+  }
+}
+
+.under-title {
+  font-size: 9pt;
+  color: gray;
+}
+
+.cohort-container {
+  min-width: 240px;
+}
+
+.line {
+  width: 100%;
+  border: 0;
+  border-top: 1px solid lightgray;
+  margin-bottom: 1rem;
+  margin-top: 0.5rem;
+}
+
+.cohort-user-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  small {
+    font-size: 0px;
+  }
+  p {
+    font-size: 12px !important;
   }
 }

@@ -8,8 +8,9 @@ import Posts from '../../components/posts';
 import useModal from '../../hooks/useModal';
 import './style.css';
 import { useNavigate } from 'react-router-dom';
-import { getPosts, post } from '../../service/apiClient';
+import { getPosts, post, getCohortsById } from '../../service/apiClient';
 import useAuth from '../../hooks/useAuth';
+import Avatar from '../../components/avatar';
 
 const Dashboard = () => {
   const [searchVal, setSearchVal] = useState('');
@@ -17,10 +18,15 @@ const Dashboard = () => {
   const [posts, setPosts] = useState([]);
   const { loggedInUser } = useAuth();
   const [initials, setInitials] = useState('');
+  const [cohorts, setCohorts] = useState([]);
 
   useEffect(() => {
     getPosts().then(setPosts);
   }, []);
+
+  useEffect(() => {
+    getCohortsById(loggedInUser.cohort_id).then(setCohorts);
+  }, [cohorts]);
 
   useEffect(() => {
     setInitials(loggedInUser.firstName.charAt(0) + loggedInUser.lastName.charAt(0));
@@ -54,6 +60,12 @@ const Dashboard = () => {
     getPosts().then(setPosts);
   };
 
+  const filteredCohorts = cohorts.filter(
+    (user) =>
+      user.firstName.toLowerCase().includes(searchVal.toLowerCase()) ||
+      user.lastName.toLowerCase().includes(searchVal.toLowerCase())
+  );
+
   return (
     <>
       <main>
@@ -81,7 +93,18 @@ const Dashboard = () => {
         </Card>
 
         <Card>
-          <h4>My Cohort</h4>
+          <div className="cohort-container">
+            <h4>My Cohort </h4>
+            <p className="under-title">Software Development, Cohort {loggedInUser.cohort_id}</p>
+            <hr className="line" />
+            <div className="cohort-user-info">
+              {filteredCohorts.map((user) => (
+                <p key={user.id}>
+                  <Avatar user={user} />
+                </p>
+              ))}
+            </div>
+          </div>
         </Card>
       </aside>
     </>
