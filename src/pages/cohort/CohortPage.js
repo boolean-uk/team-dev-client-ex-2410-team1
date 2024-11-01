@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { get } from '../../service/apiClient';
-import './myCohort.css';
+import './CohortPage.css';
 import useAuth from '../../hooks/useAuth';
 import jwtDecode from 'jwt-decode';
 
@@ -92,7 +92,7 @@ const MyCohort = () => {
           <p>Modules: 2/7 completed</p>
           <p>Units: 4/10 completed</p>
           <p>Exercises: 34/58 completed</p>
-          <button>See Exercises</button>
+          <button className="button-cohort">See Exercises</button>
         </div>
       </div>
     </div>

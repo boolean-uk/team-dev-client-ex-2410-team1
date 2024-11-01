@@ -9,7 +9,7 @@ import { AuthProvider, ProtectedRoute } from './context/auth';
 import { ModalProvider } from './context/modal';
 import Welcome from './pages/welcome';
 import ProfilePage from './pages/profile';
-import MyCohort from './pages/cohort/myCohort';
+import MyCohort from './pages/cohort/CohortPage';
 
 const App = () => {
   return (
