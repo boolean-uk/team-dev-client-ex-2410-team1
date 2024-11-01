@@ -9,7 +9,7 @@ import useModal from '../../hooks/useModal';
 import './style.css';
 import { getPosts, post } from '../../service/apiClient';
 import useAuth from '../../hooks/useAuth';
-import ProfileCircle from '../../components/profileCircle';
+// import ProfileCircle from '../../components/profileCircle';
 
 const Dashboard = () => {
   const [searchVal, setSearchVal] = useState('');
