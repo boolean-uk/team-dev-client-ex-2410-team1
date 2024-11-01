@@ -89,6 +89,5 @@ export {
   patchUserById,
   getUserById,
   post,
-  get,
   getComments
 };

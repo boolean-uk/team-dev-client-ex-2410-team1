@@ -3,7 +3,6 @@ import useModal from '../../hooks/useModal';
 import './style.css';
 import Button from '../button';
 import useAuth from '../../hooks/useAuth';
-import ProfileCircle from '../profileCircle';
 
 const CreatePostModal = ({ addPost }) => {
   // Use the useModal hook to get the closeModal function so we can close the modal on user interaction
@@ -11,9 +10,6 @@ const CreatePostModal = ({ addPost }) => {
 
   const [message, setMessage] = useState(null);
   const [text, setText] = useState('');
-  const { loggedInUser } = useAuth();
-  const userInitials = `${loggedInUser.firstName[0]}${loggedInUser.lastName[0]}`;
-
   const { loggedInUser } = useAuth();
   const [userName, setUserName] = useState('');
   const [initials, setInitials] = useState('');
