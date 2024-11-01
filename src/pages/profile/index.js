@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Avatar from '../../components/avatar';
-import { getUserById } from '../../service/apiClient';
+import { getUserById, patchUserById } from '../../service/apiClient';
 import useAuth from '../../hooks/useAuth';
 import Form from '../../components/form';
 import TextInput from '../../components/form/textInput';
@@ -66,6 +66,7 @@ const ProfilePage = () => {
 
     if (Object.keys(changeData).length > 0) {
       try {
+        await patchUserById(profileUser.id, changeData);
         // Update profileUser and formData with the new data
         setProfileUser((prevData) => ({
           ...prevData,
