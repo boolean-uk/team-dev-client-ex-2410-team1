@@ -38,7 +38,6 @@ const ProfilePage = () => {
   useEffect(() => {
     if (profileUser) {
       if (profileUser.id !== prevProfileUserId) {
-        // Initialize formData with profileUser data only if the user ID has changed
         setFormData({ ...profileUser });
         setPrevProfileUserId(profileUser.id);
       }
@@ -62,12 +61,10 @@ const ProfilePage = () => {
         changeData[key] = formData[key];
       }
     });
-    // changeData['bio'] = changeData['biography']; // Rename bio to biography
     changeData.bio = changeData.biography; // Rename bio to biography
     if (Object.keys(changeData).length > 0) {
       try {
         await patchUserById(profileUser.id, changeData);
-        // Update profileUser and formData with the new data
         setProfileUser((prevData) => ({
           ...prevData,
           ...changeData
