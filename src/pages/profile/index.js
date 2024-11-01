@@ -129,6 +129,13 @@ const ProfilePage = () => {
               <Form className="professional-info-form">
                 <h2>Professional Info</h2>
                 <TextInput
+                  value={formData.role}
+                  onChange={handleInputChange}
+                  name="role"
+                  label="role"
+                  readOnly={!canEdit}
+                />
+                <TextInput
                   value={formData.jobTitle}
                   onChange={handleInputChange}
                   name="jobTitle"
@@ -147,6 +154,13 @@ const ProfilePage = () => {
               // Else, render Training Info (Student)
               <Form className="training-info-form">
                 <h2>Training Info</h2>
+                <TextInput
+                  value={formData.role}
+                  onChange={handleInputChange}
+                  name="role"
+                  label="role"
+                  readOnly={!canEdit}
+                />
                 <TextInput
                   value={formData.specialism}
                   onChange={handleInputChange}
