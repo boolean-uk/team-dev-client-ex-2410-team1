@@ -66,6 +66,7 @@ const AuthProvider = ({ children }) => {
 
   const handleRegister = async (email, password) => {
     const res = await register(email, password);
+    localStorage.setItem('token', res.data.token);
     setToken(res.data.token);
 
     localStorage.setItem('loggedInUser', JSON.stringify(res.data));
