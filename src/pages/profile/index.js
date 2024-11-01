@@ -66,9 +66,6 @@ const ProfilePage = () => {
 
     if (Object.keys(changeData).length > 0) {
       try {
-        const response = await patchUserById(profileUser.id, changeData);
-        console.log('Response:', response);
-
         // Update profileUser and formData with the new data
         setProfileUser((prevData) => ({
           ...prevData,
@@ -86,7 +83,6 @@ const ProfilePage = () => {
         alert('Failed to update profile. Please try again.');
       }
     } else {
-      console.log('No changes detected.');
       alert('No changes to save.');
     }
   };
