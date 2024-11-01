@@ -1,60 +1,50 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import useModal from '../../hooks/useModal';
-import './style.css';
+import '../editPostModal/style.css';
 import Button from '../button';
 import useAuth from '../../hooks/useAuth';
-import ProfileCircle from '../profileCircle';
 
-const CreatePostModal = ({ addPost }) => {
-  // Use the useModal hook to get the closeModal function so we can close the modal on user interaction
+const EditCommentModal = () => {
   const { closeModal } = useModal();
-
   const [message, setMessage] = useState(null);
   const [text, setText] = useState('');
   const { loggedInUser } = useAuth();
   const userInitials = `${loggedInUser.firstName[0]}${loggedInUser.lastName[0]}`;
 
-  const { loggedInUser } = useAuth();
-  const [userName, setUserName] = useState('');
-  const [initials, setInitials] = useState('');
-
-  useEffect(() => {
-    setUserName(loggedInUser.firstName + ' ' + loggedInUser.lastName[0]);
-    setInitials(loggedInUser.firstName.charAt(0) + loggedInUser.lastName.charAt(0));
-  }, [loggedInUser]);
-
   const onChange = (e) => {
     setText(e.target.value);
   };
 
-  const onSubmit = async () => {
-    setMessage('Submit button was clicked! Closing modal in 1 seconds...');
+  const onSubmit = () => {
+    setMessage('Submit button was clicked! Closing modal in 2 seconds...');
+
     setTimeout(() => {
       setMessage(null);
       closeModal();
-    }, 1000);
-    await addPost(text);
+    }, 2000);
   };
 
   return (
     <>
       <section className="create-post-user-details">
         <div className="profile-icon">
-          <p>{initials}</p>
+          <p>{userInitials}</p>
         </div>
         <div className="post-user-name">
-          <p>{userName}</p>
+          <p>
+            {loggedInUser.firstName} {loggedInUser.lastName}
+          </p>
         </div>
       </section>
 
       <section>
-        <textarea onChange={onChange} value={text} placeholder="What's on your mind?"></textarea>
+        <textarea onChange={onChange} value={text} placeholder="Edit your comment"></textarea>
       </section>
 
       <section className="create-post-actions">
         <Button
           onClick={onSubmit}
-          text="Post"
+          text="Send"
           classes={`${text.length ? 'blue' : 'offwhite'} width-full`}
           disabled={!text.length}
         />
@@ -65,4 +55,4 @@ const CreatePostModal = ({ addPost }) => {
   );
 };
 
-export default CreatePostModal;
+export default EditCommentModal;
