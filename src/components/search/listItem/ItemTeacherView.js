@@ -1,16 +1,14 @@
 import './itemTeacherStyles.css';
 import { useNavigate } from 'react-router-dom';
+import Avatar from '../../avatar';
 
 const ItemTeacherView = ({ user }) => {
   const navigate = useNavigate();
 
   return (
     <div className="view-container">
-      <div className="image">
-        <p>
-          {user?.firstName?.[0]?.toUpperCase() || ''}
-          {user?.lastName?.[0]?.toUpperCase() || ''}
-        </p>
+      <div className="image1">
+        <Avatar user={user} />
       </div>
       <div className="userInfo">
         <p className="name-text">

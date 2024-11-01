@@ -9,16 +9,13 @@
   box-sizing: border-box;
 }
 
-.image {
-  flex-shrink: 0;
-  border-radius: 50%;
-  background-color: lightblue;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 60px;
-  width: 60px;
-  margin-right: 1rem;
+.image1 {
+  p {
+    font-size: 0px;
+  }
+  small {
+    font-size: 0px;
+  }
 }
 
 .userInfo {
@@ -32,11 +29,13 @@
 .name-text {
   font-size: 16pt;
   font-weight: bold;
+  margin-left: -80px;
 }
 
 .info-text {
   font-size: 12pt;
   color: gray;
+  margin-left: -80px;
 }
 
 .button-container {

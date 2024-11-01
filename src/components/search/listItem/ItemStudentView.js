@@ -1,6 +1,7 @@
 import './itemStudentStyles.css';
 import { useNavigate } from 'react-router-dom';
 import ProfileCircle from '../../profileCircle';
+import Avatar from '../../avatar';
 
 const ItemStudentView = ({ user }) => {
   const navigate = useNavigate();
@@ -8,10 +9,7 @@ const ItemStudentView = ({ user }) => {
   return (
     <div className="view-container2">
       <div className="image2">
-        <p>
-          {user?.firstName?.[0]?.toUpperCase() || ''}
-          {user?.lastName?.[0]?.toUpperCase() || ''}
-        </p>
+        <Avatar user={user} />
       </div>
       <div className="userInfo2">
         <p className="name-text2">

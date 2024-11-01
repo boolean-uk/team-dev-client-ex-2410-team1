@@ -98,11 +98,15 @@ const Dashboard = () => {
             <p className="under-title">Software Development, Cohort {loggedInUser.cohort_id}</p>
             <hr className="line" />
             <div className="cohort-user-info">
-              {filteredCohorts.map((user) => (
-                <p key={user.id}>
-                  <Avatar user={user} />
-                </p>
-              ))}
+              {cohorts.length === 0 ? (
+                <p>No users in your Cohort!</p>
+              ) : (
+                filteredCohorts.map((user) => (
+                  <p key={user.id}>
+                    <Avatar user={user} />
+                  </p>
+                ))
+              )}
             </div>
           </div>
         </Card>
