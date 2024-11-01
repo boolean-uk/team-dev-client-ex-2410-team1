@@ -25,6 +25,11 @@ async function getPosts() {
   return res.data.posts;
 }
 
+async function getCohortsById(cohortId) {
+  const res = await get(`cohorts/${cohortId}/users`);
+  return res.data;
+}
+
 async function getComments(id) {
   const res = await get(`posts/${id}/comments`);
   return res.data;
@@ -88,6 +93,7 @@ export {
   get,
   patchUserById,
   getUserById,
+  getCohortsById,
   post,
   getComments
 };

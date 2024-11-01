@@ -124,7 +124,7 @@ const ProfilePage = () => {
             </Form>
 
             {/* Conditionally Render Sections Based on jobTitle */}
-            {profileUser.jobTitle ? (
+            {profileUser.role === 'TEACHER' ? (
               // If jobTitle exists, assume Teacher
               <Form className="professional-info-form">
                 <h2>Professional Info</h2>

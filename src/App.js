@@ -10,6 +10,7 @@ import { ModalProvider } from './context/modal';
 import Welcome from './pages/welcome';
 import SearchResult from './pages/searchResult';
 import ProfilePage from './pages/profile';
+import MyCohort from './pages/cohort/CohortPage';
 
 const App = () => {
   return (
@@ -53,6 +54,14 @@ const App = () => {
               element={
                 <ProtectedRoute disabledNav={true}>
                   <Welcome />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="cohort"
+              element={
+                <ProtectedRoute>
+                  <MyCohort />
                 </ProtectedRoute>
               }
             />
