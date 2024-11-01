@@ -25,6 +25,11 @@ async function getPosts() {
   return res.data.posts;
 }
 
+async function getCohortsById(cohortId) {
+  const res = await get(`cohorts/${cohortId}/users`);
+  return res.data;
+}
+
 async function getComments(id) {
   const res = await get(`posts/${id}/comments`);
   return res.data;
@@ -72,4 +77,4 @@ async function request(method, endpoint, data, auth = true) {
   return response.json();
 }
 
-export { login, getPosts, register, createProfile, patchUserById, getUserById, post, get, getComments };
+export { login, getPosts, register, createProfile, patchUserById, getUserById, getCohortsById, post, get, getComments };
