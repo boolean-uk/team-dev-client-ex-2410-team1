@@ -1,41 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { get } from '../../service/apiClient';
+import { getCohortsById } from '../../service/apiClient';
 import './CohortPage.css';
 import useAuth from '../../hooks/useAuth';
-import jwtDecode from 'jwt-decode';
 
 const MyCohort = () => {
   const [students, setStudents] = useState([]);
   const [teachers, setTeachers] = useState([]);
-  const [loggedInUser, setLoggedInUser] = useState([]);
-  const { token } = useAuth();
-
-  useEffect(() => {
-    const loggedInId = jwtDecode(token).userId;
-
-    async function fetchUser() {
-      try {
-        const res = await get(`users/${loggedInId}`);
-        const user = res.data;
-        setLoggedInUser(user);
-      } catch (error) {}
-    }
-
-    fetchUser();
-  }, [token]);
+  const { loggedInUser } = useAuth();
 
   useEffect(() => {
     async function fetchUsers() {
       try {
-        const res = await get('users');
-        const users = res.data;
+        const res = await getCohortsById(loggedInUser.cohort_id);
 
-        const studentList = users.filter(
-          (user) => user.role === 'STUDENT' && user.cohort_id === loggedInUser.cohort_id
-        );
-        const teacherList = users.filter(
-          (user) => user.role === 'TEACHER' && user.cohort_id === loggedInUser.cohort_id
-        );
+        const studentList = res.filter((user) => user.role === 'STUDENT');
+        const teacherList = res.filter((user) => user.role === 'TEACHER');
 
         setStudents(studentList);
         setTeachers(teacherList);
@@ -43,7 +22,7 @@ const MyCohort = () => {
     }
 
     fetchUsers();
-  }, [loggedInUser]);
+  }, []);
 
   return (
     <div className="cohort-page">
@@ -79,8 +58,7 @@ const MyCohort = () => {
                 {teacher.lastName ? teacher.lastName[0] : '?'}
               </div>
               <div className="name">
-                {teacher.firstName}
-                {teacher.lastName}
+                {teacher.firstName} {teacher.lastName}
               </div>
               <div className="subject">{teacher.specialism}</div>
             </div>

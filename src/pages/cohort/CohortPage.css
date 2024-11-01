@@ -2,11 +2,20 @@
   display: flex;
   padding: 20px;
   font-family: Arial, sans-serif;
+  /* justify-content: center; */
+  /* width: 100%; */
 }
 
 .cohort-content {
   flex: 3;
   padding-right: 20px;
+  justify-self: auto;
+  min-width: 600px
+}
+
+.teacher-section{
+  width:max-content;
+  width: 400px;
 }
 
 .sidebar {
