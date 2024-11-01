@@ -29,17 +29,13 @@
   align-items: center; /* Vertically centers the content */
 }
 
-form {
-  /* Add the top border */
-  border-top: 1px solid #ccc; /* Adjust the color and thickness as needed */
-  padding-top: 50px;
-}
-
 .basic-info-form,
 .professional-info-form,
 .training-info-form,
 .contact-info-form,
 .additional-info-form {
+  border-top: 1px solid #ccc; /* Adjust the color and thickness as needed */
+  padding-top: 50px;
   align-self: start;
   flex: 1;
   min-width: 300px;

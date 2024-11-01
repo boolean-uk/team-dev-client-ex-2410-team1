@@ -20,8 +20,8 @@ const Header = () => {
   useEffect(() => {
     setUserName(loggedInUser.firstName + ' ' + loggedInUser.lastName);
     setInitials(loggedInUser.firstName.charAt(0) + loggedInUser.lastName.charAt(0));
-    setJob(loggedInUser.jobTitle || 'Student');
-    setCohort(loggedInUser.cohortId || 0);
+    setJob(loggedInUser.specialism || 'Student');
+    setCohort(loggedInUser.cohort_id || 0);
   }, [loggedInUser]);
 
   const onClickProfileIcon = () => {
