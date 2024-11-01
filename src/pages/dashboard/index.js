@@ -7,15 +7,15 @@ import TextInput from '../../components/form/textInput';
 import Posts from '../../components/posts';
 import useModal from '../../hooks/useModal';
 import './style.css';
+import { useNavigate } from 'react-router-dom';
 import { getPosts, post } from '../../service/apiClient';
 import useAuth from '../../hooks/useAuth';
-// import ProfileCircle from '../../components/profileCircle';
 
 const Dashboard = () => {
   const [searchVal, setSearchVal] = useState('');
+  const navigate = useNavigate();
   const [posts, setPosts] = useState([]);
   const { loggedInUser } = useAuth();
-  // const userInitials = `${loggedInUser.firstName[0]}${loggedInUser.lastName[0]}`;
   const [initials, setInitials] = useState('');
 
   useEffect(() => {
@@ -28,6 +28,13 @@ const Dashboard = () => {
 
   const onChange = (e) => {
     setSearchVal(e.target.value);
+  };
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    if (searchVal.trim()) {
+      navigate('/searchresult', { state: { searchVal } });
+    }
   };
 
   // Use the useModal hook to get the openModal and setModal functions
@@ -68,7 +75,7 @@ const Dashboard = () => {
 
       <aside>
         <Card>
-          <form onSubmit={(e) => e.preventDefault()}>
+          <form onSubmit={handleSearchSubmit}>
             <TextInput icon={<SearchIcon />} value={searchVal} name="Search" onChange={onChange} />
           </form>
         </Card>

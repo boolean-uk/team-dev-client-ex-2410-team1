@@ -8,6 +8,7 @@ import Verification from './pages/verification';
 import { AuthProvider, ProtectedRoute } from './context/auth';
 import { ModalProvider } from './context/modal';
 import Welcome from './pages/welcome';
+import SearchResult from './pages/searchResult';
 import ProfilePage from './pages/profile';
 import MyCohort from './pages/cohort/CohortPage';
 
@@ -23,6 +24,15 @@ const App = () => {
             <Route path="verification" element={<Verification />} />
 
             <Route
+              path="searchresult"
+              element={
+                <ProtectedRoute>
+                  <SearchResult />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
               path="profile/:id"
               element={
                 <ProtectedRoute>
@@ -30,6 +40,7 @@ const App = () => {
                 </ProtectedRoute>
               }
             />
+
             <Route
               index
               element={

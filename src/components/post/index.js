@@ -14,6 +14,8 @@ const Post = ({ id, name, date, content, likes = 0, imageUrl }) => {
   const [showAllComments, setShowAllComments] = useState(false);
   const commentsToDisplay = showAllComments ? allComments : allComments.slice(0, 3);
   const [isRed, setIsRed] = useState(false);
+  const [allLikes, setAllLikes] = useState(likes);
+
   const { openModal, setModal } = useModal();
   const userInitials = name.match(/\b(\w)/g);
 
@@ -34,9 +36,26 @@ const Post = ({ id, name, date, content, likes = 0, imageUrl }) => {
   useEffect(() => {
     fetchComments();
   }, []);
+
   const toggleColor = () => {
     setIsRed(!isRed);
+    setAllLikes((prevLikes) => (prevLikes === 0 ? 1 : prevLikes + 1));
   };
+
+  const formatDate = (isoString) => {
+    const date = new Date(isoString);
+
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = date.toLocaleString('en-GB', { month: 'long' });
+    const time = date.toLocaleTimeString('en-GB', {
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false
+    });
+
+    return `${day} ${month} at ${time}`;
+  };
+
   return (
     <Card>
       <article className="post">
@@ -44,7 +63,7 @@ const Post = ({ id, name, date, content, likes = 0, imageUrl }) => {
           <ProfileCircle initials={userInitials} />
           <div className="post-user-name">
             <p>{name}</p>
-            <small>{date}</small>
+            <small>{formatDate(date)}</small>
           </div>
 
           <div className="edit-icon">
@@ -80,7 +99,11 @@ const Post = ({ id, name, date, content, likes = 0, imageUrl }) => {
             </div>
           </div>
 
-          <p>{!likes && 'Be the first to like this'}</p>
+          <p>
+            {allLikes === 0
+              ? 'Be the first to like this'
+              : `${allLikes} ${allLikes > 1 ? 'likes' : 'like'}`}
+          </p>
         </section>
 
         <div className="comment-section">

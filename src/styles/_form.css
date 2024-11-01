@@ -19,6 +19,7 @@ form label {
 
 .inputwrapper {
   position: relative;
+  width: 100%;
 }
 
 .input-icon {

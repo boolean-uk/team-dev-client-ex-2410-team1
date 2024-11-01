@@ -1,0 +1,92 @@
+.searchresult-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  height: auto;
+  background-color: #f0f5fa;
+}
+
+/* Top-level layout for back arrow and header */
+.top-level {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 800px;
+  margin-bottom: 1.5rem;
+  gap: 1rem;
+}
+
+.top-level h2 {
+  font-weight: bold;
+  margin-left: -120px;
+  /* aligns text directly after back button */
+  color: #000046;
+}
+
+/* Back button styles */
+.back-btn {
+  cursor: pointer;
+  color: #000046;
+  margin-right: 30px;
+  display: flex;
+}
+
+.page-info {
+  display: flex;
+  flex-direction: column;
+  margin-left: 250px;
+  width: 100%;
+  height: 100%;
+}
+
+/* Form layout */
+.search-form {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.clear-btn {
+  cursor: pointer;
+  margin-left: 1rem;
+  background: none;
+  border: none;
+  padding: 0.5rem;
+}
+
+/* Search results layout */
+.search-results {
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  width: 100%;
+  gap: 1rem;
+  padding-top: 1rem;
+  background-color: white;
+  height: 100%;
+}
+
+.people-text {
+  font-size: 1.25rem;
+  font-weight: semi-bold;
+  color: gray;
+  padding-left: 1.2rem;
+}
+
+.search-results hr {
+  width: 95%;
+  border: 0;
+  border-top: 1px solid lightgray;
+  margin-bottom: 0.5rem;
+  margin-left: 1rem;
+}
+
+.search-results h3 {
+  font-size: 16pt;
+  font-weight: bold;
+  color: #000046;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}

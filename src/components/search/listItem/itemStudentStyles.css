@@ -1,0 +1,66 @@
+.view-container2 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: white;
+  height: 100%;
+  width: 100%;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.image2 {
+  flex-shrink: 0;
+  border-radius: 50%;
+  background-color: lightblue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+  width: 60px;
+  margin-right: 1rem;
+}
+
+.userInfo2 {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-right: 1rem;
+}
+
+.name-text2 {
+  font-size: 16pt;
+  font-weight: bold;
+}
+
+.info-text2 {
+  font-size: 12pt;
+  color: gray;
+}
+
+.button-container2 {
+  display: flex;
+  align-items: center;
+  gap: 30px; /* Reduced gap to keep items close together */
+}
+
+.profile-btn2:hover {
+  background-color: #f0f5fa;
+  border-radius: 4px;
+}
+
+.edit-icon2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  background: #f0f5fa;
+  cursor: pointer;
+}
+
+.edit-icon2 p {
+  font-size: 20px;
+}

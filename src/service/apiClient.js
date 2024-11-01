@@ -51,6 +51,13 @@ async function get(endpoint, auth = true) {
   return await request('GET', endpoint, null, auth);
 }
 
+async function getAllUsers(name = '') {
+  console.log('getting users with name,', name);
+  const query = name ? `?name=${name}` : '';
+  const res = await get(`users${query}`);
+  return res.data;
+}
+
 async function getUserById(id) {
   return await get(`users/${id}`);
 }
@@ -82,10 +89,11 @@ export {
   getPosts,
   register,
   createProfile,
+  getAllUsers,
+  get,
   patchUserById,
   getUserById,
   getCohortsById,
   post,
-  get,
   getComments
 };
