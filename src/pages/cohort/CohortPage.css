@@ -100,6 +100,6 @@
   transition: background 0.2s;
 }
 
-button:hover {
+.button-cohort:hover {
   background-color: #357abd;
 }

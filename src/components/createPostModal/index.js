@@ -15,7 +15,7 @@ const CreatePostModal = ({ addPost }) => {
   const [initials, setInitials] = useState('');
 
   useEffect(() => {
-    setUserName(loggedInUser.firstName + ' ' + loggedInUser.lastName[0]);
+    setUserName(loggedInUser.firstName + ' ' + loggedInUser.lastName);
     setInitials(loggedInUser.firstName.charAt(0) + loggedInUser.lastName.charAt(0));
   }, [loggedInUser]);
 
