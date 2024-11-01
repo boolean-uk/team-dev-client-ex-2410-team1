@@ -8,13 +8,20 @@ import Posts from '../../components/posts';
 import useModal from '../../hooks/useModal';
 import './style.css';
 import { useNavigate } from 'react-router-dom';
+import { getPosts, post } from '../../service/apiClient';
 import useAuth from '../../hooks/useAuth';
 
 const Dashboard = () => {
   const [searchVal, setSearchVal] = useState('');
   const navigate = useNavigate();
+  const [posts, setPosts] = useState([]);
   const { loggedInUser } = useAuth();
+  // const userInitials = `${loggedInUser.firstName[0]}${loggedInUser.lastName[0]}`;
   const [initials, setInitials] = useState('');
+
+  useEffect(() => {
+    getPosts().then(setPosts);
+  }, []);
 
   useEffect(() => {
     setInitials(loggedInUser.firstName.charAt(0) + loggedInUser.lastName.charAt(0));
@@ -37,10 +44,15 @@ const Dashboard = () => {
   // Create a function to run on user interaction
   const showModal = () => {
     // Use setModal to set the header of the modal and the component the modal should render
-    setModal('Create a post', <CreatePostModal />); // CreatePostModal is just a standard React component, nothing special
+    setModal('Create a post', <CreatePostModal addPost={addNewPost} />); // CreatePostModal is just a standard React component, nothing special
 
     // Open the modal!
     openModal();
+  };
+
+  const addNewPost = async (text) => {
+    await post('posts', { content: text });
+    getPosts().then(setPosts);
   };
 
   return (
@@ -55,7 +67,7 @@ const Dashboard = () => {
           </div>
         </Card>
 
-        <Posts />
+        <Posts posts={posts} />
       </main>
 
       <aside>

@@ -25,6 +25,11 @@ async function getPosts() {
   return res.data.posts;
 }
 
+async function getComments(id) {
+  const res = await get(`posts/${id}/comments`);
+  return res.data;
+}
+
 async function post(endpoint, data, auth = true) {
   return await request('POST', endpoint, data, auth);
 }
@@ -74,4 +79,16 @@ async function request(method, endpoint, data, auth = true) {
   return response.json();
 }
 
-export { login, getPosts, register, createProfile, getAllUsers, get, patchUserById, getUserById };
+export {
+  login,
+  getPosts,
+  register,
+  createProfile,
+  getAllUsers,
+  get,
+  patchUserById,
+  getUserById,
+  post,
+  get,
+  getComments
+};
