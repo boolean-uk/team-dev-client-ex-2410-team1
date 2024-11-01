@@ -16,16 +16,16 @@ const ProfilePage = () => {
   const [formData, setFormData] = useState(null);
   const [prevProfileUserId, setPrevProfileUserId] = useState(null);
 
+  const fetchUserData = async (profileId, setter) => {
+    try {
+      const response = await getUserById(profileId);
+      console.log('User data:', response.data);
+      setter(response.data);
+    } catch (error) {
+      console.error(`Error fetching user data for ID ${profileId}:`, error);
+    }
+  };
   useEffect(() => {
-    const fetchUserData = async (profileId, setter) => {
-      try {
-        const response = await getUserById(profileId);
-        setter(response.data);
-      } catch (error) {
-        console.error(`Error fetching user data for ID ${profileId}:`, error);
-      }
-    };
-
     fetchUserData(id, setProfileUser);
   }, [id]);
 
@@ -95,10 +95,7 @@ const ProfilePage = () => {
             {/* Basic Info */}
             <Form className="basic-info-form">
               <h2>Basic Info</h2>
-              <img
-                src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50"
-                alt="avatar"
-              />
+              <img src={profileUser.imageUrl} alt="avatar" />
 
               <TextInput
                 value={formData.firstName}
@@ -129,6 +126,13 @@ const ProfilePage = () => {
               <Form className="professional-info-form">
                 <h2>Professional Info</h2>
                 <TextInput
+                  value={formData.role}
+                  onChange={handleInputChange}
+                  name="role"
+                  label="role"
+                  readOnly={!canEdit}
+                />
+                <TextInput
                   value={formData.jobTitle}
                   onChange={handleInputChange}
                   name="jobTitle"
@@ -155,7 +159,7 @@ const ProfilePage = () => {
                   readOnly={!canEdit}
                 />
                 <TextInput
-                  value={formData.cohort}
+                  value={formData.cohort_id}
                   onChange={handleInputChange}
                   name="cohort"
                   label="Cohort"
