@@ -15,13 +15,13 @@ const Header = () => {
   const [userName, setUserName] = useState('');
   const [initials, setInitials] = useState('');
   const [job, setJob] = useState('');
-  const [cohort, setCohort] = useState(0);
+  const [cohortid, setCohort] = useState(0);
 
   useEffect(() => {
     setUserName(loggedInUser.firstName + ' ' + loggedInUser.lastName);
     setInitials(loggedInUser.firstName.charAt(0) + loggedInUser.lastName.charAt(0));
     setJob(loggedInUser.jobTitle || 'Student');
-    setCohort(loggedInUser.cohortId || 0);
+    setCohort(loggedInUser.cohort_id || 0);
   }, [loggedInUser]);
 
   const onClickProfileIcon = () => {
@@ -37,7 +37,8 @@ const Header = () => {
       <FullLogo textColour="white" />
 
       <div className="profile-icon" onClick={onClickProfileIcon}>
-        <p>{initials}</p>
+        {/* <p>{initials}</p> */}
+        <img src={loggedInUser.imageUrl}></img>
       </div>
 
       {isMenuVisible && (
@@ -45,13 +46,14 @@ const Header = () => {
           <Card>
             <section className="post-details">
               <div className="profile-icon">
-                <p>{initials}</p>
+                {/* <p>{initials}</p> */}
+                <img src={loggedInUser.imageUrl}></img>
               </div>
 
               <div className="post-user-name">
                 <p>{userName}</p>
                 <small>
-                  {job}, Cohort {cohort}
+                  {job}, Cohort {cohortid}
                 </small>
               </div>
             </section>
