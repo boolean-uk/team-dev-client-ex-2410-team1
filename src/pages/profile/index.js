@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Avatar from '../../components/avatar';
-import { getUserById, patchUserById } from '../../service/apiClient';
+import { getUserById } from '../../service/apiClient';
 import useAuth from '../../hooks/useAuth';
 import Form from '../../components/form';
 import TextInput from '../../components/form/textInput';
