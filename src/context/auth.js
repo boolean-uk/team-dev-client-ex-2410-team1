@@ -3,17 +3,19 @@ import { useNavigate, useLocation, Navigate } from 'react-router-dom';
 import Header from '../components/header';
 import Modal from '../components/modal';
 import Navigation from '../components/navigation';
-import useAuth from '../hooks/useAuth';
 import { createProfile, login, register } from '../service/apiClient';
 
 // eslint-disable-next-line camelcase
 import jwt_decode from 'jwt-decode';
+import useAuth from '../hooks/useAuth';
 
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const [token, setToken] = useState(null);
+
+  // not saved when page is refreshed
   const [loggedInUser, setLoggedInUser] = useState(null);
 
   useEffect(() => {
@@ -58,14 +60,13 @@ const AuthProvider = ({ children }) => {
 
   const handleLogout = () => {
     localStorage.removeItem('token');
-    localStorage.removeItem('loggedInUser');
-
     setToken(null);
     setLoggedInUser(null);
   };
 
   const handleRegister = async (email, password) => {
     const res = await register(email, password);
+    localStorage.setItem('token', res.data.token);
     setToken(res.data.token);
 
     localStorage.setItem('loggedInUser', JSON.stringify(res.data));
